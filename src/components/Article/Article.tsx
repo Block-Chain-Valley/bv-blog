@@ -1,11 +1,12 @@
 import { ArticleItemTypes } from "@/utils/types";
-import { GatsbyImage, StaticImage } from "gatsby-plugin-image";
+import { navigate } from "gatsby";
+import { GatsbyImage } from "gatsby-plugin-image";
 import React from "react";
 import Tag from "../Tag/Tag";
 
 export type ArticleProps = ArticleItemTypes;
 
-export const Article = ({ image, title, description, tags }: ArticleProps) => {
+export const Article = ({ image, title, description, tags, slug }: ArticleProps) => {
   return (
     <div className="flex w-full items-center gap-10">
       {/* Image */}
@@ -14,7 +15,15 @@ export const Article = ({ image, title, description, tags }: ArticleProps) => {
       </div>
       {/* Article */}
       <div className="flex flex-col items-start gap-5">
-        <div className="text-20/semi-bold text-theme-black">{title}</div>
+        <button
+          type="button"
+          className="text-20/semi-bold text-theme-black"
+          onClick={() => {
+            navigate(`/post/${slug}`);
+          }}
+        >
+          {title}
+        </button>
         <div className="text-16/regular text-theme-black">{description}</div>
         <div className="flex items-start gap-3">
           {/* tags */}
