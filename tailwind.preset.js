@@ -32,6 +32,11 @@ const colors = {
     error: "#f04438",
     success: "#12b76a",
   },
+  point: {
+    pointBlue: "#5C5FAE",
+    pointGreen: "#557F41",
+    pointYellow: "#9D904A",
+  },
   etc: {
     transparentBlack: "#000000cc",
   },
@@ -77,7 +82,7 @@ module.exports = {
       colors: {
         ...colors,
         theme: {
-          lightGray: colors.gray[200],
+          lightGray: colors.gray[100],
           gray: colors.gray[400],
           white: colors.gray.white,
           primary: colors.primary[600],
@@ -85,6 +90,9 @@ module.exports = {
           blackTransparent: colors.etc.transparentBlack,
           success: colors.message.success,
           error: colors.message.error,
+          pointBlue: colors.point.pointBlue,
+          pointGreen: colors.point.pointGreen,
+          pointYellow: colors.point.pointYellow,
         },
       },
     },

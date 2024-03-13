@@ -22,10 +22,17 @@ const config: GatsbyConfig = {
     "gatsby-transformer-sharp",
     "gatsby-plugin-postcss",
     "gatsby-plugin-sitemap",
+    `gatsby-plugin-tsconfig-paths`,
     {
       resolve: "gatsby-plugin-manifest",
       options: {
         icon: "src/assets/images/icon.png",
+      },
+    },
+    {
+      resolve: `gatsby-plugin-graphql-codegen`,
+      options: {
+        fileName: `./tools/graphql/gatsby-graphql.ts`,
       },
     },
     "gatsby-plugin-mdx",

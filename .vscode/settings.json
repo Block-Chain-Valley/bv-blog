@@ -68,5 +68,5 @@
   "[typescriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "cSpell.words": ["clsx", "codegen", "commitlint", "gitmessage", "nestjs", "Pretendard", "tailwindcss"]
+  "cSpell.words": ["clsx", "codegen", "commitlint", "Contentful", "gitmessage", "nestjs", "Pretendard", "tailwindcss"]
 }
