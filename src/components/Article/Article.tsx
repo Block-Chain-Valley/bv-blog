@@ -1,5 +1,5 @@
-import { ArticleItemTypes, TagTypes } from "@/utils/types";
-import { GatsbyImage, IGatsbyImageData, StaticImage } from "gatsby-plugin-image";
+import { ArticleItemTypes } from "@/utils/types";
+import { GatsbyImage, StaticImage } from "gatsby-plugin-image";
 import React from "react";
 import Tag from "../Tag/Tag";
 
@@ -9,11 +9,9 @@ export const Article = ({ image, title, description, tags }: ArticleProps) => {
   return (
     <div className="flex w-full items-center gap-10">
       {/* Image */}
-      {image ? (
-        <GatsbyImage image={image} alt="article" className="h-[144px] w-[144px]" />
-      ) : (
-        <StaticImage src="../../assets/images/ArticleDefault.png" alt="ArticleDefault" width={144} height={144} />
-      )}
+      <div className="h-[144px] w-[144px]">
+        <GatsbyImage image={{ ...image, layout: "fixed" }} alt="article" />
+      </div>
       {/* Article */}
       <div className="flex flex-col items-start gap-5">
         <div className="text-20/semi-bold text-theme-black">{title}</div>

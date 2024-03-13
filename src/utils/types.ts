@@ -8,9 +8,15 @@ export enum TagTypes {
   FRAMEWORK = "Framework",
 }
 
+export enum ArticleTypes {
+  TECH = "Tech",
+  RESEARCH = "Research",
+}
+
 export interface ArticleItemTypes {
-  image?: IGatsbyImageData;
+  image: IGatsbyImageData;
   title: string;
   description: string;
   tags: TagTypes[];
+  types: ArticleTypes;
 }

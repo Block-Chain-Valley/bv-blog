@@ -1,13 +1,13 @@
 import { HomeIndexQuery } from "@/graphql";
 import { Banner, Footer, Header, HomeBody } from "@/layouts";
-import { tagTypeMapper } from "@/utils/mapper";
+import { articleTypeMapper, tagTypeMapper } from "@/utils/mapper";
 import { PageProps, graphql } from "gatsby";
 import { IGatsbyImageData } from "gatsby-plugin-image";
 import React, { useMemo } from "react";
 
 export const homeQuery = graphql`
   query HomeIndex {
-    allContentfulPost {
+    allContentfulPost(sort: { createdAt: DESC }) {
       nodes {
         id
         title
@@ -39,16 +39,19 @@ export const HomeIndex = ({ data }: PageProps<HomeIndexQuery>) => {
     () =>
       articles.map((article) => {
         return {
-          thumbnail: article.homeThumbnail.gatsbyImageData as IGatsbyImageData,
+          image: article.homeThumbnail.gatsbyImageData as IGatsbyImageData,
           title: article.title,
           description: article.description,
           tags: article.tags.map((tag) => {
+            console.log(tag);
             return tagTypeMapper(tag);
           }),
+          types: articleTypeMapper(article.articleType),
         };
       }),
     [articles],
   );
+  console.log(articleBriefItems);
 
   return (
     <div className="flex flex-col">
