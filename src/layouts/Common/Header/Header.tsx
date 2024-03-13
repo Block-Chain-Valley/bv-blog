@@ -13,8 +13,8 @@ export const Header = () => {
   return (
     <div className="px- flex w-full items-center justify-between px-[60px] py-8">
       <button type="button" className="flex flex-row items-center justify-center gap-2.5" onClick={() => navigate("/")}>
-        <StaticImage src="../../../assets/images/Logo.png" alt="BV Logo" width={160} height={45} />
-        <div className="text-16/semi-bold text-theme-black">기술 블로그</div>
+        <StaticImage src="../../../assets/images/Logo.png" alt="BV Logo" placeholder="none" width={160} height={45} />
+        <div className="text-20/regular text-theme-black">기술 블로그</div>
       </button>
       <div className="flex items-center justify-center gap-[50px]">
         <Tab tabName="Tech" isActivated={true} />

@@ -17,10 +17,34 @@ export const Footer = () => {
           <div className="flex flex-col items-start gap-2.5">
             <p className="text-13/semi-bold">SNS 링크</p>
             <div className="flex items-start gap-3">
-              <StaticImage src="../../../assets/icons/Instagram.png" alt="Instagram" width={24} height={24} />
-              <StaticImage src="../../../assets/icons/Twitter.png" alt="Twitter" width={24} height={24} />
-              <StaticImage src="../../../assets/icons/Medium.png" alt="Medium" width={24} height={24} />
-              <StaticImage src="../../../assets/icons/Linktree.png" alt="Linktree" width={24} height={24} />
+              <StaticImage
+                src="../../../assets/icons/Instagram.png"
+                alt="Instagram"
+                placeholder="none"
+                width={24}
+                height={24}
+              />
+              <StaticImage
+                src="../../../assets/icons/Twitter.png"
+                alt="Twitter"
+                placeholder="none"
+                width={24}
+                height={24}
+              />
+              <StaticImage
+                src="../../../assets/icons/Medium.png"
+                alt="Medium"
+                placeholder="none"
+                width={24}
+                height={24}
+              />
+              <StaticImage
+                src="../../../assets/icons/Linktree.png"
+                alt="Linktree"
+                placeholder="none"
+                width={24}
+                height={24}
+              />
             </div>
           </div>
         </div>

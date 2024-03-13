@@ -74,6 +74,18 @@ input[type="search"]::-webkit-search-results-decoration {
   height: 100%;
 }
 
+.soft-transition {
+  transition: 0.5s ease-in-out;
+}
+
+.move-transition {
+  transition: transform 0.5s ease-in-out;
+}
+
+.is-up {
+  transform: translateY(-8px);
+}
+
 iframe {
   max-width: 100%;
 }

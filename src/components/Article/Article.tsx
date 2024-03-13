@@ -1,25 +1,35 @@
 import { ArticleItemTypes } from "@/utils/types";
+import clsx from "clsx";
 import { navigate } from "gatsby";
 import { GatsbyImage } from "gatsby-plugin-image";
-import React from "react";
+import React, { useState } from "react";
 import Tag from "../Tag/Tag";
 
 export type ArticleProps = ArticleItemTypes;
 
 export const Article = ({ image, title, description, tags, slug }: ArticleProps) => {
+  const [isHovered, setIsHovered] = useState(false);
   return (
-    <div className="flex w-full items-center gap-10">
+    <div className="flex w-full items-center gap-14">
       {/* Image */}
-      <div className="h-[144px] w-[144px]">
-        <GatsbyImage image={{ ...image, layout: "fixed" }} alt="article" />
-      </div>
+      <GatsbyImage
+        image={{ ...image, layout: "fixed", width: 196, height: 196 }}
+        alt="article"
+        className={clsx("move-transition", isHovered && "translate-y-[-8px]")}
+      />
       {/* Article */}
       <div className="flex flex-col items-start gap-5">
         <button
           type="button"
-          className="text-20/semi-bold text-theme-black"
+          className={clsx("text-24/semi-bold soft-transition text-theme-black", isHovered && "text-theme-primary")}
           onClick={() => {
             navigate(`/post/${slug}`);
+          }}
+          onMouseEnter={() => {
+            setIsHovered(true);
+          }}
+          onMouseLeave={() => {
+            setIsHovered(false);
           }}
         >
           {title}

@@ -8,7 +8,7 @@ export interface HomeBodyProps {
 
 export const HomeBody = ({ articleBriefItems }: HomeBodyProps) => {
   return (
-    <div className="flex flex-col items-start px-[200px] py-10">
+    <div className="flex w-[1000px] flex-col items-start py-10">
       {/* Recent */}
       <ArticleGroup groupTitle="Recent" articleBriefItems={[articleBriefItems.at(0)]} moreButtonVisible={false} />
       {/* Tech */}

@@ -1,11 +1,10 @@
+import Markdown from "@/components/Markdown/Markdown";
 import Profile from "@/components/Profile/Profile";
 import ProfileLarge from "@/components/Profile/ProfileLarge";
 import ShareButton from "@/components/ShareButton/ShareButton";
 import { Team } from "@/utils/types";
 import { GatsbyImage, IGatsbyImageData } from "gatsby-plugin-image";
 import React from "react";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
 
 export interface PostBodyProps {
   title: string;
@@ -43,9 +42,7 @@ export const PostBody = ({
         <Profile profileImage={profileImage} name={name} team={team} year={year} createdAt={createdAt} />
       </div>
       {/* Content */}
-      <ReactMarkdown className="prose max-w-none" remarkPlugins={[remarkGfm]}>
-        {body}
-      </ReactMarkdown>
+      <Markdown body={body} />
       {/* Content Footer */}
       <div className="flex flex-col items-start gap-10 self-stretch py-5">
         <div className="text-20/semi-bold text-theme-black">도움이 되는 아티클이었나요?</div>

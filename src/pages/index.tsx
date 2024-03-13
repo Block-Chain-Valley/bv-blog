@@ -46,7 +46,7 @@ export const HomeIndex = ({ data }: PageProps<GetPostsQuery>) => {
   );
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col items-center">
       <Header />
       <Banner />
       <HomeBody articleBriefItems={articleBriefItems} />
