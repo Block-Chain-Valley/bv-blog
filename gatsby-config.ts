@@ -17,6 +17,7 @@ const config: GatsbyConfig = {
         spaceId: process.env.CONTENTFUL_SPACE_ID,
       },
     },
+    `gatsby-transformer-remark`,
     "gatsby-plugin-image",
     "gatsby-plugin-sharp",
     "gatsby-transformer-sharp",
@@ -35,7 +36,6 @@ const config: GatsbyConfig = {
         fileName: `./tools/graphql/gatsby-graphql.ts`,
       },
     },
-    "gatsby-plugin-mdx",
     {
       resolve: "gatsby-source-filesystem",
       options: {

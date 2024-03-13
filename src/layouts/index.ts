@@ -5,3 +5,4 @@ export * from "./Common/Header/Header";
 
 // Others
 export * from "./HomeBody/HomeBody";
+export * from "./PostBody/PostBody";

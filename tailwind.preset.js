@@ -44,7 +44,7 @@ const colors = {
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  plugins: [require("./tools/plugins/tailwind")],
+  plugins: [require("./tools/plugins/tailwind"), require("@tailwindcss/typography")],
   safelist: [
     "after:pb-[50%]",
     "after:pb-[75%]",
@@ -72,8 +72,11 @@ module.exports = {
       "13/regular": ["13px", { fontWeight: 400, lineHeight: "130%" }],
       "16/semi-bold": ["16px", { fontWeight: 600, lineHeight: "130%" }],
       "16/regular": ["16px", { fontWeight: 400, lineHeight: "130%" }],
+      "16/light": ["16px", { fontWeight: 300, lineHeight: "130%" }],
       "20/semi-bold": ["20px", { fontWeight: 600, lineHeight: "130%" }],
       "20/regular": ["20px", { fontWeight: 400, lineHeight: "130%" }],
+      "24/semi-bold": ["24px", { fontWeight: 600, lineHeight: "130%" }],
+      "24/regular": ["24px", { fontWeight: 400, lineHeight: "130%" }],
       "30/semi-bold": ["30px", { fontWeight: 600, lineHeight: "130%" }],
       "30/bold": ["30px", { fontWeight: 700, lineHeight: "130%" }],
       "60/bold": ["60px", { fontWeight: 700, lineHeight: "130%" }],

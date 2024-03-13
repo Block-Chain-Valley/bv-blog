@@ -8,9 +8,14 @@ export enum TagTypes {
   FRAMEWORK = "Framework",
 }
 
-export enum ArticleTypes {
+export enum Article {
   TECH = "Tech",
   RESEARCH = "Research",
+}
+
+export enum Team {
+  DEV = "Development Team",
+  RESEARCH = "Research Team",
 }
 
 export interface ArticleItemTypes {
@@ -18,5 +23,6 @@ export interface ArticleItemTypes {
   title: string;
   description: string;
   tags: TagTypes[];
-  types: ArticleTypes;
+  types: Article;
+  slug: string;
 }

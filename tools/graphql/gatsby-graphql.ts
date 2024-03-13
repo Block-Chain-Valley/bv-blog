@@ -589,14 +589,14 @@ export type ContentfulPost = ContentfulReference & ContentfulEntry & Node & {
   userEmail?: Maybe<Scalars['String']>;
   homeThumbnail?: Maybe<ContentfulAsset>;
   dpThumbnail?: Maybe<ContentfulAsset>;
-  content?: Maybe<ContentfulPostContentTextNode>;
+  body?: Maybe<ContentfulPostBodyTextNode>;
   spaceId?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['Date']>;
   sys?: Maybe<ContentfulPostSys>;
-  /** Returns all children nodes filtered by type contentfulPostContentTextNode */
-  childrenContentfulPostContentTextNode?: Maybe<Array<Maybe<ContentfulPostContentTextNode>>>;
-  /** Returns the first child node of type contentfulPostContentTextNode or null if there are no children of given type on this node */
-  childContentfulPostContentTextNode?: Maybe<ContentfulPostContentTextNode>;
+  /** Returns all children nodes filtered by type contentfulPostBodyTextNode */
+  childrenContentfulPostBodyTextNode?: Maybe<Array<Maybe<ContentfulPostBodyTextNode>>>;
+  /** Returns the first child node of type contentfulPostBodyTextNode or null if there are no children of given type on this node */
+  childContentfulPostBodyTextNode?: Maybe<ContentfulPostBodyTextNode>;
   parent?: Maybe<Node>;
   children: Array<Node>;
   internal: Internal;
@@ -632,6 +632,76 @@ export type ContentfulPostSysContentTypeSys = {
   type?: Maybe<Scalars['String']>;
   linkType?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['String']>;
+};
+
+export type ContentfulUser = ContentfulReference & ContentfulEntry & Node & {
+  contentful_id: Scalars['String'];
+  id: Scalars['ID'];
+  node_locale: Scalars['String'];
+  userEmail?: Maybe<Scalars['String']>;
+  team?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  year?: Maybe<Scalars['Int']>;
+  profileText?: Maybe<Scalars['String']>;
+  profileImage?: Maybe<ContentfulAsset>;
+  spaceId?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['Date']>;
+  updatedAt?: Maybe<Scalars['Date']>;
+  sys?: Maybe<ContentfulUserSys>;
+  parent?: Maybe<Node>;
+  children: Array<Node>;
+  internal: Internal;
+};
+
+
+export type ContentfulUserCreatedAtArgs = {
+  formatString?: InputMaybe<Scalars['String']>;
+  fromNow?: InputMaybe<Scalars['Boolean']>;
+  difference?: InputMaybe<Scalars['String']>;
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+export type ContentfulUserUpdatedAtArgs = {
+  formatString?: InputMaybe<Scalars['String']>;
+  fromNow?: InputMaybe<Scalars['Boolean']>;
+  difference?: InputMaybe<Scalars['String']>;
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+export type ContentfulUserSys = {
+  type?: Maybe<Scalars['String']>;
+  revision?: Maybe<Scalars['Int']>;
+  contentType?: Maybe<ContentfulUserSysContentType>;
+};
+
+export type ContentfulUserSysContentType = {
+  sys?: Maybe<ContentfulUserSysContentTypeSys>;
+};
+
+export type ContentfulUserSysContentTypeSys = {
+  type?: Maybe<Scalars['String']>;
+  linkType?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
+};
+
+export type Mdx = Node & {
+  excerpt?: Maybe<Scalars['String']>;
+  tableOfContents?: Maybe<Scalars['JSON']>;
+  id: Scalars['ID'];
+  parent?: Maybe<Node>;
+  children: Array<Node>;
+  internal: Internal;
+};
+
+
+export type MdxExcerptArgs = {
+  pruneLength?: InputMaybe<Scalars['Int']>;
+};
+
+
+export type MdxTableOfContentsArgs = {
+  maxDepth?: InputMaybe<Scalars['Int']>;
 };
 
 export type GatsbyImageFormat =
@@ -902,35 +972,16 @@ export type ImageSharpResize = {
   originalName?: Maybe<Scalars['String']>;
 };
 
-export type Mdx = Node & {
-  excerpt?: Maybe<Scalars['String']>;
-  tableOfContents?: Maybe<Scalars['JSON']>;
+export type ContentfulPostBodyTextNode = Node & {
   id: Scalars['ID'];
   parent?: Maybe<Node>;
   children: Array<Node>;
   internal: Internal;
+  body?: Maybe<Scalars['String']>;
+  sys?: Maybe<ContentfulPostBodyTextNodeSys>;
 };
 
-
-export type MdxExcerptArgs = {
-  pruneLength?: InputMaybe<Scalars['Int']>;
-};
-
-
-export type MdxTableOfContentsArgs = {
-  maxDepth?: InputMaybe<Scalars['Int']>;
-};
-
-export type ContentfulPostContentTextNode = Node & {
-  id: Scalars['ID'];
-  parent?: Maybe<Node>;
-  children: Array<Node>;
-  internal: Internal;
-  content?: Maybe<Scalars['String']>;
-  sys?: Maybe<ContentfulPostContentTextNodeSys>;
-};
-
-export type ContentfulPostContentTextNodeSys = {
+export type ContentfulPostBodyTextNodeSys = {
   type?: Maybe<Scalars['String']>;
 };
 
@@ -970,12 +1021,14 @@ export type Query = {
   allContentfulAsset: ContentfulAssetConnection;
   contentfulPost?: Maybe<ContentfulPost>;
   allContentfulPost: ContentfulPostConnection;
-  imageSharp?: Maybe<ImageSharp>;
-  allImageSharp: ImageSharpConnection;
+  contentfulUser?: Maybe<ContentfulUser>;
+  allContentfulUser: ContentfulUserConnection;
   mdx?: Maybe<Mdx>;
   allMdx: MdxConnection;
-  contentfulPostContentTextNode?: Maybe<ContentfulPostContentTextNode>;
-  allContentfulPostContentTextNode: ContentfulPostContentTextNodeConnection;
+  imageSharp?: Maybe<ImageSharp>;
+  allImageSharp: ImageSharpConnection;
+  contentfulPostBodyTextNode?: Maybe<ContentfulPostBodyTextNode>;
+  allContentfulPostBodyTextNode: ContentfulPostBodyTextNodeConnection;
   contentfulContentType?: Maybe<ContentfulContentType>;
   allContentfulContentType: ContentfulContentTypeConnection;
 };
@@ -1261,12 +1314,12 @@ export type QueryContentfulPostArgs = {
   userEmail?: InputMaybe<StringQueryOperatorInput>;
   homeThumbnail?: InputMaybe<ContentfulAssetFilterInput>;
   dpThumbnail?: InputMaybe<ContentfulAssetFilterInput>;
-  content?: InputMaybe<ContentfulPostContentTextNodeFilterInput>;
+  body?: InputMaybe<ContentfulPostBodyTextNodeFilterInput>;
   spaceId?: InputMaybe<StringQueryOperatorInput>;
   updatedAt?: InputMaybe<DateQueryOperatorInput>;
   sys?: InputMaybe<ContentfulPostSysFilterInput>;
-  childrenContentfulPostContentTextNode?: InputMaybe<ContentfulPostContentTextNodeFilterListInput>;
-  childContentfulPostContentTextNode?: InputMaybe<ContentfulPostContentTextNodeFilterInput>;
+  childrenContentfulPostBodyTextNode?: InputMaybe<ContentfulPostBodyTextNodeFilterListInput>;
+  childContentfulPostBodyTextNode?: InputMaybe<ContentfulPostBodyTextNodeFilterInput>;
   parent?: InputMaybe<NodeFilterInput>;
   children?: InputMaybe<NodeFilterListInput>;
   internal?: InputMaybe<InternalFilterInput>;
@@ -1276,6 +1329,52 @@ export type QueryContentfulPostArgs = {
 export type QueryAllContentfulPostArgs = {
   filter?: InputMaybe<ContentfulPostFilterInput>;
   sort?: InputMaybe<Array<InputMaybe<ContentfulPostSortInput>>>;
+  skip?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']>;
+};
+
+
+export type QueryContentfulUserArgs = {
+  contentful_id?: InputMaybe<StringQueryOperatorInput>;
+  id?: InputMaybe<StringQueryOperatorInput>;
+  node_locale?: InputMaybe<StringQueryOperatorInput>;
+  userEmail?: InputMaybe<StringQueryOperatorInput>;
+  team?: InputMaybe<StringQueryOperatorInput>;
+  name?: InputMaybe<StringQueryOperatorInput>;
+  year?: InputMaybe<IntQueryOperatorInput>;
+  profileText?: InputMaybe<StringQueryOperatorInput>;
+  profileImage?: InputMaybe<ContentfulAssetFilterInput>;
+  spaceId?: InputMaybe<StringQueryOperatorInput>;
+  createdAt?: InputMaybe<DateQueryOperatorInput>;
+  updatedAt?: InputMaybe<DateQueryOperatorInput>;
+  sys?: InputMaybe<ContentfulUserSysFilterInput>;
+  parent?: InputMaybe<NodeFilterInput>;
+  children?: InputMaybe<NodeFilterListInput>;
+  internal?: InputMaybe<InternalFilterInput>;
+};
+
+
+export type QueryAllContentfulUserArgs = {
+  filter?: InputMaybe<ContentfulUserFilterInput>;
+  sort?: InputMaybe<Array<InputMaybe<ContentfulUserSortInput>>>;
+  skip?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']>;
+};
+
+
+export type QueryMdxArgs = {
+  excerpt?: InputMaybe<StringQueryOperatorInput>;
+  tableOfContents?: InputMaybe<JsonQueryOperatorInput>;
+  id?: InputMaybe<StringQueryOperatorInput>;
+  parent?: InputMaybe<NodeFilterInput>;
+  children?: InputMaybe<NodeFilterListInput>;
+  internal?: InputMaybe<InternalFilterInput>;
+};
+
+
+export type QueryAllMdxArgs = {
+  filter?: InputMaybe<MdxFilterInput>;
+  sort?: InputMaybe<Array<InputMaybe<MdxSortInput>>>;
   skip?: InputMaybe<Scalars['Int']>;
   limit?: InputMaybe<Scalars['Int']>;
 };
@@ -1302,37 +1401,19 @@ export type QueryAllImageSharpArgs = {
 };
 
 
-export type QueryMdxArgs = {
-  excerpt?: InputMaybe<StringQueryOperatorInput>;
-  tableOfContents?: InputMaybe<JsonQueryOperatorInput>;
+export type QueryContentfulPostBodyTextNodeArgs = {
   id?: InputMaybe<StringQueryOperatorInput>;
   parent?: InputMaybe<NodeFilterInput>;
   children?: InputMaybe<NodeFilterListInput>;
   internal?: InputMaybe<InternalFilterInput>;
+  body?: InputMaybe<StringQueryOperatorInput>;
+  sys?: InputMaybe<ContentfulPostBodyTextNodeSysFilterInput>;
 };
 
 
-export type QueryAllMdxArgs = {
-  filter?: InputMaybe<MdxFilterInput>;
-  sort?: InputMaybe<Array<InputMaybe<MdxSortInput>>>;
-  skip?: InputMaybe<Scalars['Int']>;
-  limit?: InputMaybe<Scalars['Int']>;
-};
-
-
-export type QueryContentfulPostContentTextNodeArgs = {
-  id?: InputMaybe<StringQueryOperatorInput>;
-  parent?: InputMaybe<NodeFilterInput>;
-  children?: InputMaybe<NodeFilterListInput>;
-  internal?: InputMaybe<InternalFilterInput>;
-  content?: InputMaybe<StringQueryOperatorInput>;
-  sys?: InputMaybe<ContentfulPostContentTextNodeSysFilterInput>;
-};
-
-
-export type QueryAllContentfulPostContentTextNodeArgs = {
-  filter?: InputMaybe<ContentfulPostContentTextNodeFilterInput>;
-  sort?: InputMaybe<Array<InputMaybe<ContentfulPostContentTextNodeSortInput>>>;
+export type QueryAllContentfulPostBodyTextNodeArgs = {
+  filter?: InputMaybe<ContentfulPostBodyTextNodeFilterInput>;
+  sort?: InputMaybe<Array<InputMaybe<ContentfulPostBodyTextNodeSortInput>>>;
   skip?: InputMaybe<Scalars['Int']>;
   limit?: InputMaybe<Scalars['Int']>;
 };
@@ -3121,16 +3202,16 @@ export type RemoteFileResizeSortInput = {
   src?: InputMaybe<SortOrderEnum>;
 };
 
-export type ContentfulPostContentTextNodeFilterInput = {
+export type ContentfulPostBodyTextNodeFilterInput = {
   id?: InputMaybe<StringQueryOperatorInput>;
   parent?: InputMaybe<NodeFilterInput>;
   children?: InputMaybe<NodeFilterListInput>;
   internal?: InputMaybe<InternalFilterInput>;
-  content?: InputMaybe<StringQueryOperatorInput>;
-  sys?: InputMaybe<ContentfulPostContentTextNodeSysFilterInput>;
+  body?: InputMaybe<StringQueryOperatorInput>;
+  sys?: InputMaybe<ContentfulPostBodyTextNodeSysFilterInput>;
 };
 
-export type ContentfulPostContentTextNodeSysFilterInput = {
+export type ContentfulPostBodyTextNodeSysFilterInput = {
   type?: InputMaybe<StringQueryOperatorInput>;
 };
 
@@ -3150,8 +3231,8 @@ export type ContentfulPostSysContentTypeSysFilterInput = {
   id?: InputMaybe<StringQueryOperatorInput>;
 };
 
-export type ContentfulPostContentTextNodeFilterListInput = {
-  elemMatch?: InputMaybe<ContentfulPostContentTextNodeFilterInput>;
+export type ContentfulPostBodyTextNodeFilterListInput = {
+  elemMatch?: InputMaybe<ContentfulPostBodyTextNodeFilterInput>;
 };
 
 export type ContentfulPostConnection = {
@@ -3212,27 +3293,27 @@ export type ContentfulPostFieldSelector = {
   userEmail?: InputMaybe<FieldSelectorEnum>;
   homeThumbnail?: InputMaybe<ContentfulAssetFieldSelector>;
   dpThumbnail?: InputMaybe<ContentfulAssetFieldSelector>;
-  content?: InputMaybe<ContentfulPostContentTextNodeFieldSelector>;
+  body?: InputMaybe<ContentfulPostBodyTextNodeFieldSelector>;
   spaceId?: InputMaybe<FieldSelectorEnum>;
   updatedAt?: InputMaybe<FieldSelectorEnum>;
   sys?: InputMaybe<ContentfulPostSysFieldSelector>;
-  childrenContentfulPostContentTextNode?: InputMaybe<ContentfulPostContentTextNodeFieldSelector>;
-  childContentfulPostContentTextNode?: InputMaybe<ContentfulPostContentTextNodeFieldSelector>;
+  childrenContentfulPostBodyTextNode?: InputMaybe<ContentfulPostBodyTextNodeFieldSelector>;
+  childContentfulPostBodyTextNode?: InputMaybe<ContentfulPostBodyTextNodeFieldSelector>;
   parent?: InputMaybe<NodeFieldSelector>;
   children?: InputMaybe<NodeFieldSelector>;
   internal?: InputMaybe<InternalFieldSelector>;
 };
 
-export type ContentfulPostContentTextNodeFieldSelector = {
+export type ContentfulPostBodyTextNodeFieldSelector = {
   id?: InputMaybe<FieldSelectorEnum>;
   parent?: InputMaybe<NodeFieldSelector>;
   children?: InputMaybe<NodeFieldSelector>;
   internal?: InputMaybe<InternalFieldSelector>;
-  content?: InputMaybe<FieldSelectorEnum>;
-  sys?: InputMaybe<ContentfulPostContentTextNodeSysFieldSelector>;
+  body?: InputMaybe<FieldSelectorEnum>;
+  sys?: InputMaybe<ContentfulPostBodyTextNodeSysFieldSelector>;
 };
 
-export type ContentfulPostContentTextNodeSysFieldSelector = {
+export type ContentfulPostBodyTextNodeSysFieldSelector = {
   type?: InputMaybe<FieldSelectorEnum>;
 };
 
@@ -3306,12 +3387,12 @@ export type ContentfulPostFilterInput = {
   userEmail?: InputMaybe<StringQueryOperatorInput>;
   homeThumbnail?: InputMaybe<ContentfulAssetFilterInput>;
   dpThumbnail?: InputMaybe<ContentfulAssetFilterInput>;
-  content?: InputMaybe<ContentfulPostContentTextNodeFilterInput>;
+  body?: InputMaybe<ContentfulPostBodyTextNodeFilterInput>;
   spaceId?: InputMaybe<StringQueryOperatorInput>;
   updatedAt?: InputMaybe<DateQueryOperatorInput>;
   sys?: InputMaybe<ContentfulPostSysFilterInput>;
-  childrenContentfulPostContentTextNode?: InputMaybe<ContentfulPostContentTextNodeFilterListInput>;
-  childContentfulPostContentTextNode?: InputMaybe<ContentfulPostContentTextNodeFilterInput>;
+  childrenContentfulPostBodyTextNode?: InputMaybe<ContentfulPostBodyTextNodeFilterListInput>;
+  childContentfulPostBodyTextNode?: InputMaybe<ContentfulPostBodyTextNodeFilterInput>;
   parent?: InputMaybe<NodeFilterInput>;
   children?: InputMaybe<NodeFilterListInput>;
   internal?: InputMaybe<InternalFilterInput>;
@@ -3330,27 +3411,27 @@ export type ContentfulPostSortInput = {
   userEmail?: InputMaybe<SortOrderEnum>;
   homeThumbnail?: InputMaybe<ContentfulAssetSortInput>;
   dpThumbnail?: InputMaybe<ContentfulAssetSortInput>;
-  content?: InputMaybe<ContentfulPostContentTextNodeSortInput>;
+  body?: InputMaybe<ContentfulPostBodyTextNodeSortInput>;
   spaceId?: InputMaybe<SortOrderEnum>;
   updatedAt?: InputMaybe<SortOrderEnum>;
   sys?: InputMaybe<ContentfulPostSysSortInput>;
-  childrenContentfulPostContentTextNode?: InputMaybe<ContentfulPostContentTextNodeSortInput>;
-  childContentfulPostContentTextNode?: InputMaybe<ContentfulPostContentTextNodeSortInput>;
+  childrenContentfulPostBodyTextNode?: InputMaybe<ContentfulPostBodyTextNodeSortInput>;
+  childContentfulPostBodyTextNode?: InputMaybe<ContentfulPostBodyTextNodeSortInput>;
   parent?: InputMaybe<NodeSortInput>;
   children?: InputMaybe<NodeSortInput>;
   internal?: InputMaybe<InternalSortInput>;
 };
 
-export type ContentfulPostContentTextNodeSortInput = {
+export type ContentfulPostBodyTextNodeSortInput = {
   id?: InputMaybe<SortOrderEnum>;
   parent?: InputMaybe<NodeSortInput>;
   children?: InputMaybe<NodeSortInput>;
   internal?: InputMaybe<InternalSortInput>;
-  content?: InputMaybe<SortOrderEnum>;
-  sys?: InputMaybe<ContentfulPostContentTextNodeSysSortInput>;
+  body?: InputMaybe<SortOrderEnum>;
+  sys?: InputMaybe<ContentfulPostBodyTextNodeSysSortInput>;
 };
 
-export type ContentfulPostContentTextNodeSysSortInput = {
+export type ContentfulPostBodyTextNodeSysSortInput = {
   type?: InputMaybe<SortOrderEnum>;
 };
 
@@ -3370,90 +3451,195 @@ export type ContentfulPostSysContentTypeSysSortInput = {
   id?: InputMaybe<SortOrderEnum>;
 };
 
-export type ImageSharpConnection = {
+export type ContentfulUserSysFilterInput = {
+  type?: InputMaybe<StringQueryOperatorInput>;
+  revision?: InputMaybe<IntQueryOperatorInput>;
+  contentType?: InputMaybe<ContentfulUserSysContentTypeFilterInput>;
+};
+
+export type ContentfulUserSysContentTypeFilterInput = {
+  sys?: InputMaybe<ContentfulUserSysContentTypeSysFilterInput>;
+};
+
+export type ContentfulUserSysContentTypeSysFilterInput = {
+  type?: InputMaybe<StringQueryOperatorInput>;
+  linkType?: InputMaybe<StringQueryOperatorInput>;
+  id?: InputMaybe<StringQueryOperatorInput>;
+};
+
+export type ContentfulUserConnection = {
   totalCount: Scalars['Int'];
-  edges: Array<ImageSharpEdge>;
-  nodes: Array<ImageSharp>;
+  edges: Array<ContentfulUserEdge>;
+  nodes: Array<ContentfulUser>;
   pageInfo: PageInfo;
   distinct: Array<Scalars['String']>;
   max?: Maybe<Scalars['Float']>;
   min?: Maybe<Scalars['Float']>;
   sum?: Maybe<Scalars['Float']>;
-  group: Array<ImageSharpGroupConnection>;
+  group: Array<ContentfulUserGroupConnection>;
 };
 
 
-export type ImageSharpConnectionDistinctArgs = {
-  field: ImageSharpFieldSelector;
+export type ContentfulUserConnectionDistinctArgs = {
+  field: ContentfulUserFieldSelector;
 };
 
 
-export type ImageSharpConnectionMaxArgs = {
-  field: ImageSharpFieldSelector;
+export type ContentfulUserConnectionMaxArgs = {
+  field: ContentfulUserFieldSelector;
 };
 
 
-export type ImageSharpConnectionMinArgs = {
-  field: ImageSharpFieldSelector;
+export type ContentfulUserConnectionMinArgs = {
+  field: ContentfulUserFieldSelector;
 };
 
 
-export type ImageSharpConnectionSumArgs = {
-  field: ImageSharpFieldSelector;
+export type ContentfulUserConnectionSumArgs = {
+  field: ContentfulUserFieldSelector;
 };
 
 
-export type ImageSharpConnectionGroupArgs = {
+export type ContentfulUserConnectionGroupArgs = {
   skip?: InputMaybe<Scalars['Int']>;
   limit?: InputMaybe<Scalars['Int']>;
-  field: ImageSharpFieldSelector;
+  field: ContentfulUserFieldSelector;
 };
 
-export type ImageSharpEdge = {
-  next?: Maybe<ImageSharp>;
-  node: ImageSharp;
-  previous?: Maybe<ImageSharp>;
+export type ContentfulUserEdge = {
+  next?: Maybe<ContentfulUser>;
+  node: ContentfulUser;
+  previous?: Maybe<ContentfulUser>;
 };
 
-export type ImageSharpGroupConnection = {
+export type ContentfulUserFieldSelector = {
+  contentful_id?: InputMaybe<FieldSelectorEnum>;
+  id?: InputMaybe<FieldSelectorEnum>;
+  node_locale?: InputMaybe<FieldSelectorEnum>;
+  userEmail?: InputMaybe<FieldSelectorEnum>;
+  team?: InputMaybe<FieldSelectorEnum>;
+  name?: InputMaybe<FieldSelectorEnum>;
+  year?: InputMaybe<FieldSelectorEnum>;
+  profileText?: InputMaybe<FieldSelectorEnum>;
+  profileImage?: InputMaybe<ContentfulAssetFieldSelector>;
+  spaceId?: InputMaybe<FieldSelectorEnum>;
+  createdAt?: InputMaybe<FieldSelectorEnum>;
+  updatedAt?: InputMaybe<FieldSelectorEnum>;
+  sys?: InputMaybe<ContentfulUserSysFieldSelector>;
+  parent?: InputMaybe<NodeFieldSelector>;
+  children?: InputMaybe<NodeFieldSelector>;
+  internal?: InputMaybe<InternalFieldSelector>;
+};
+
+export type ContentfulUserSysFieldSelector = {
+  type?: InputMaybe<FieldSelectorEnum>;
+  revision?: InputMaybe<FieldSelectorEnum>;
+  contentType?: InputMaybe<ContentfulUserSysContentTypeFieldSelector>;
+};
+
+export type ContentfulUserSysContentTypeFieldSelector = {
+  sys?: InputMaybe<ContentfulUserSysContentTypeSysFieldSelector>;
+};
+
+export type ContentfulUserSysContentTypeSysFieldSelector = {
+  type?: InputMaybe<FieldSelectorEnum>;
+  linkType?: InputMaybe<FieldSelectorEnum>;
+  id?: InputMaybe<FieldSelectorEnum>;
+};
+
+export type ContentfulUserGroupConnection = {
   totalCount: Scalars['Int'];
-  edges: Array<ImageSharpEdge>;
-  nodes: Array<ImageSharp>;
+  edges: Array<ContentfulUserEdge>;
+  nodes: Array<ContentfulUser>;
   pageInfo: PageInfo;
   distinct: Array<Scalars['String']>;
   max?: Maybe<Scalars['Float']>;
   min?: Maybe<Scalars['Float']>;
   sum?: Maybe<Scalars['Float']>;
-  group: Array<ImageSharpGroupConnection>;
+  group: Array<ContentfulUserGroupConnection>;
   field: Scalars['String'];
   fieldValue?: Maybe<Scalars['String']>;
 };
 
 
-export type ImageSharpGroupConnectionDistinctArgs = {
-  field: ImageSharpFieldSelector;
+export type ContentfulUserGroupConnectionDistinctArgs = {
+  field: ContentfulUserFieldSelector;
 };
 
 
-export type ImageSharpGroupConnectionMaxArgs = {
-  field: ImageSharpFieldSelector;
+export type ContentfulUserGroupConnectionMaxArgs = {
+  field: ContentfulUserFieldSelector;
 };
 
 
-export type ImageSharpGroupConnectionMinArgs = {
-  field: ImageSharpFieldSelector;
+export type ContentfulUserGroupConnectionMinArgs = {
+  field: ContentfulUserFieldSelector;
 };
 
 
-export type ImageSharpGroupConnectionSumArgs = {
-  field: ImageSharpFieldSelector;
+export type ContentfulUserGroupConnectionSumArgs = {
+  field: ContentfulUserFieldSelector;
 };
 
 
-export type ImageSharpGroupConnectionGroupArgs = {
+export type ContentfulUserGroupConnectionGroupArgs = {
   skip?: InputMaybe<Scalars['Int']>;
   limit?: InputMaybe<Scalars['Int']>;
-  field: ImageSharpFieldSelector;
+  field: ContentfulUserFieldSelector;
+};
+
+export type ContentfulUserFilterInput = {
+  contentful_id?: InputMaybe<StringQueryOperatorInput>;
+  id?: InputMaybe<StringQueryOperatorInput>;
+  node_locale?: InputMaybe<StringQueryOperatorInput>;
+  userEmail?: InputMaybe<StringQueryOperatorInput>;
+  team?: InputMaybe<StringQueryOperatorInput>;
+  name?: InputMaybe<StringQueryOperatorInput>;
+  year?: InputMaybe<IntQueryOperatorInput>;
+  profileText?: InputMaybe<StringQueryOperatorInput>;
+  profileImage?: InputMaybe<ContentfulAssetFilterInput>;
+  spaceId?: InputMaybe<StringQueryOperatorInput>;
+  createdAt?: InputMaybe<DateQueryOperatorInput>;
+  updatedAt?: InputMaybe<DateQueryOperatorInput>;
+  sys?: InputMaybe<ContentfulUserSysFilterInput>;
+  parent?: InputMaybe<NodeFilterInput>;
+  children?: InputMaybe<NodeFilterListInput>;
+  internal?: InputMaybe<InternalFilterInput>;
+};
+
+export type ContentfulUserSortInput = {
+  contentful_id?: InputMaybe<SortOrderEnum>;
+  id?: InputMaybe<SortOrderEnum>;
+  node_locale?: InputMaybe<SortOrderEnum>;
+  userEmail?: InputMaybe<SortOrderEnum>;
+  team?: InputMaybe<SortOrderEnum>;
+  name?: InputMaybe<SortOrderEnum>;
+  year?: InputMaybe<SortOrderEnum>;
+  profileText?: InputMaybe<SortOrderEnum>;
+  profileImage?: InputMaybe<ContentfulAssetSortInput>;
+  spaceId?: InputMaybe<SortOrderEnum>;
+  createdAt?: InputMaybe<SortOrderEnum>;
+  updatedAt?: InputMaybe<SortOrderEnum>;
+  sys?: InputMaybe<ContentfulUserSysSortInput>;
+  parent?: InputMaybe<NodeSortInput>;
+  children?: InputMaybe<NodeSortInput>;
+  internal?: InputMaybe<InternalSortInput>;
+};
+
+export type ContentfulUserSysSortInput = {
+  type?: InputMaybe<SortOrderEnum>;
+  revision?: InputMaybe<SortOrderEnum>;
+  contentType?: InputMaybe<ContentfulUserSysContentTypeSortInput>;
+};
+
+export type ContentfulUserSysContentTypeSortInput = {
+  sys?: InputMaybe<ContentfulUserSysContentTypeSysSortInput>;
+};
+
+export type ContentfulUserSysContentTypeSysSortInput = {
+  type?: InputMaybe<SortOrderEnum>;
+  linkType?: InputMaybe<SortOrderEnum>;
+  id?: InputMaybe<SortOrderEnum>;
 };
 
 export type MdxConnection = {
@@ -3569,90 +3755,176 @@ export type MdxSortInput = {
   internal?: InputMaybe<InternalSortInput>;
 };
 
-export type ContentfulPostContentTextNodeConnection = {
+export type ImageSharpConnection = {
   totalCount: Scalars['Int'];
-  edges: Array<ContentfulPostContentTextNodeEdge>;
-  nodes: Array<ContentfulPostContentTextNode>;
+  edges: Array<ImageSharpEdge>;
+  nodes: Array<ImageSharp>;
   pageInfo: PageInfo;
   distinct: Array<Scalars['String']>;
   max?: Maybe<Scalars['Float']>;
   min?: Maybe<Scalars['Float']>;
   sum?: Maybe<Scalars['Float']>;
-  group: Array<ContentfulPostContentTextNodeGroupConnection>;
+  group: Array<ImageSharpGroupConnection>;
 };
 
 
-export type ContentfulPostContentTextNodeConnectionDistinctArgs = {
-  field: ContentfulPostContentTextNodeFieldSelector;
+export type ImageSharpConnectionDistinctArgs = {
+  field: ImageSharpFieldSelector;
 };
 
 
-export type ContentfulPostContentTextNodeConnectionMaxArgs = {
-  field: ContentfulPostContentTextNodeFieldSelector;
+export type ImageSharpConnectionMaxArgs = {
+  field: ImageSharpFieldSelector;
 };
 
 
-export type ContentfulPostContentTextNodeConnectionMinArgs = {
-  field: ContentfulPostContentTextNodeFieldSelector;
+export type ImageSharpConnectionMinArgs = {
+  field: ImageSharpFieldSelector;
 };
 
 
-export type ContentfulPostContentTextNodeConnectionSumArgs = {
-  field: ContentfulPostContentTextNodeFieldSelector;
+export type ImageSharpConnectionSumArgs = {
+  field: ImageSharpFieldSelector;
 };
 
 
-export type ContentfulPostContentTextNodeConnectionGroupArgs = {
+export type ImageSharpConnectionGroupArgs = {
   skip?: InputMaybe<Scalars['Int']>;
   limit?: InputMaybe<Scalars['Int']>;
-  field: ContentfulPostContentTextNodeFieldSelector;
+  field: ImageSharpFieldSelector;
 };
 
-export type ContentfulPostContentTextNodeEdge = {
-  next?: Maybe<ContentfulPostContentTextNode>;
-  node: ContentfulPostContentTextNode;
-  previous?: Maybe<ContentfulPostContentTextNode>;
+export type ImageSharpEdge = {
+  next?: Maybe<ImageSharp>;
+  node: ImageSharp;
+  previous?: Maybe<ImageSharp>;
 };
 
-export type ContentfulPostContentTextNodeGroupConnection = {
+export type ImageSharpGroupConnection = {
   totalCount: Scalars['Int'];
-  edges: Array<ContentfulPostContentTextNodeEdge>;
-  nodes: Array<ContentfulPostContentTextNode>;
+  edges: Array<ImageSharpEdge>;
+  nodes: Array<ImageSharp>;
   pageInfo: PageInfo;
   distinct: Array<Scalars['String']>;
   max?: Maybe<Scalars['Float']>;
   min?: Maybe<Scalars['Float']>;
   sum?: Maybe<Scalars['Float']>;
-  group: Array<ContentfulPostContentTextNodeGroupConnection>;
+  group: Array<ImageSharpGroupConnection>;
   field: Scalars['String'];
   fieldValue?: Maybe<Scalars['String']>;
 };
 
 
-export type ContentfulPostContentTextNodeGroupConnectionDistinctArgs = {
-  field: ContentfulPostContentTextNodeFieldSelector;
+export type ImageSharpGroupConnectionDistinctArgs = {
+  field: ImageSharpFieldSelector;
 };
 
 
-export type ContentfulPostContentTextNodeGroupConnectionMaxArgs = {
-  field: ContentfulPostContentTextNodeFieldSelector;
+export type ImageSharpGroupConnectionMaxArgs = {
+  field: ImageSharpFieldSelector;
 };
 
 
-export type ContentfulPostContentTextNodeGroupConnectionMinArgs = {
-  field: ContentfulPostContentTextNodeFieldSelector;
+export type ImageSharpGroupConnectionMinArgs = {
+  field: ImageSharpFieldSelector;
 };
 
 
-export type ContentfulPostContentTextNodeGroupConnectionSumArgs = {
-  field: ContentfulPostContentTextNodeFieldSelector;
+export type ImageSharpGroupConnectionSumArgs = {
+  field: ImageSharpFieldSelector;
 };
 
 
-export type ContentfulPostContentTextNodeGroupConnectionGroupArgs = {
+export type ImageSharpGroupConnectionGroupArgs = {
   skip?: InputMaybe<Scalars['Int']>;
   limit?: InputMaybe<Scalars['Int']>;
-  field: ContentfulPostContentTextNodeFieldSelector;
+  field: ImageSharpFieldSelector;
+};
+
+export type ContentfulPostBodyTextNodeConnection = {
+  totalCount: Scalars['Int'];
+  edges: Array<ContentfulPostBodyTextNodeEdge>;
+  nodes: Array<ContentfulPostBodyTextNode>;
+  pageInfo: PageInfo;
+  distinct: Array<Scalars['String']>;
+  max?: Maybe<Scalars['Float']>;
+  min?: Maybe<Scalars['Float']>;
+  sum?: Maybe<Scalars['Float']>;
+  group: Array<ContentfulPostBodyTextNodeGroupConnection>;
+};
+
+
+export type ContentfulPostBodyTextNodeConnectionDistinctArgs = {
+  field: ContentfulPostBodyTextNodeFieldSelector;
+};
+
+
+export type ContentfulPostBodyTextNodeConnectionMaxArgs = {
+  field: ContentfulPostBodyTextNodeFieldSelector;
+};
+
+
+export type ContentfulPostBodyTextNodeConnectionMinArgs = {
+  field: ContentfulPostBodyTextNodeFieldSelector;
+};
+
+
+export type ContentfulPostBodyTextNodeConnectionSumArgs = {
+  field: ContentfulPostBodyTextNodeFieldSelector;
+};
+
+
+export type ContentfulPostBodyTextNodeConnectionGroupArgs = {
+  skip?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']>;
+  field: ContentfulPostBodyTextNodeFieldSelector;
+};
+
+export type ContentfulPostBodyTextNodeEdge = {
+  next?: Maybe<ContentfulPostBodyTextNode>;
+  node: ContentfulPostBodyTextNode;
+  previous?: Maybe<ContentfulPostBodyTextNode>;
+};
+
+export type ContentfulPostBodyTextNodeGroupConnection = {
+  totalCount: Scalars['Int'];
+  edges: Array<ContentfulPostBodyTextNodeEdge>;
+  nodes: Array<ContentfulPostBodyTextNode>;
+  pageInfo: PageInfo;
+  distinct: Array<Scalars['String']>;
+  max?: Maybe<Scalars['Float']>;
+  min?: Maybe<Scalars['Float']>;
+  sum?: Maybe<Scalars['Float']>;
+  group: Array<ContentfulPostBodyTextNodeGroupConnection>;
+  field: Scalars['String'];
+  fieldValue?: Maybe<Scalars['String']>;
+};
+
+
+export type ContentfulPostBodyTextNodeGroupConnectionDistinctArgs = {
+  field: ContentfulPostBodyTextNodeFieldSelector;
+};
+
+
+export type ContentfulPostBodyTextNodeGroupConnectionMaxArgs = {
+  field: ContentfulPostBodyTextNodeFieldSelector;
+};
+
+
+export type ContentfulPostBodyTextNodeGroupConnectionMinArgs = {
+  field: ContentfulPostBodyTextNodeFieldSelector;
+};
+
+
+export type ContentfulPostBodyTextNodeGroupConnectionSumArgs = {
+  field: ContentfulPostBodyTextNodeFieldSelector;
+};
+
+
+export type ContentfulPostBodyTextNodeGroupConnectionGroupArgs = {
+  skip?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']>;
+  field: ContentfulPostBodyTextNodeFieldSelector;
 };
 
 export type ContentfulContentTypeSysFilterInput = {
@@ -3789,14 +4061,15 @@ export type ContentfulContentTypeSysSortInput = {
 export type GetPostsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetPostsQuery = { allContentfulPost: { nodes: Array<{ id: string, title?: string | null, description?: string | null, tags?: Array<string | null> | null, articleType?: string | null, slug?: string | null, createdAt?: any | null, userEmail?: string | null, homeThumbnail?: { gatsbyImageData?: any | null, publicUrl: string } | null, dpThumbnail?: { gatsbyImageData?: any | null, publicUrl: string } | null, content?: { content?: string | null } | null }> } };
+export type GetPostsQuery = { allContentfulPost: { nodes: Array<{ id: string, title?: string | null, description?: string | null, tags?: Array<string | null> | null, articleType?: string | null, slug?: string | null, createdAt?: any | null, userEmail?: string | null, homeThumbnail?: { gatsbyImageData?: any | null, publicUrl: string } | null }> } };
 
 export type GetPostBySlugQueryVariables = Exact<{
   slug: Scalars['String'];
+  userEmail: Scalars['String'];
 }>;
 
 
-export type GetPostBySlugQuery = { contentfulPost?: { id: string, title?: string | null, description?: string | null, tags?: Array<string | null> | null, articleType?: string | null, slug?: string | null, createdAt?: any | null, userEmail?: string | null, homeThumbnail?: { gatsbyImageData?: any | null, publicUrl: string } | null, dpThumbnail?: { gatsbyImageData?: any | null, publicUrl: string } | null, content?: { content?: string | null } | null } | null };
+export type GetPostBySlugQuery = { contentfulUser?: { userEmail?: string | null, name?: string | null, team?: string | null, year?: number | null, profileText?: string | null, profileImage?: { gatsbyImageData?: any | null, publicUrl: string } | null } | null, contentfulPost?: { id: string, title?: string | null, articleType?: string | null, slug?: string | null, createdAt?: any | null, dpThumbnail?: { gatsbyImageData?: any | null, publicUrl: string } | null, body?: { body?: string | null } | null } | null };
 
 export type GatsbyImageSharpFixedFragment = { base64?: string | null, width: number, height: number, src: string, srcSet: string };
 

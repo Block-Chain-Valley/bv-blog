@@ -8,6 +8,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       allContentfulPost(sort: { createdAt: DESC }) {
         nodes {
           slug
+          userEmail
         }
       }
     }
@@ -25,6 +26,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       component: postTemplate,
       context: {
         slug: node.slug,
+        userEmail: node.userEmail,
       },
     });
   });

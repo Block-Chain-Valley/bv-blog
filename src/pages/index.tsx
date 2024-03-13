@@ -21,13 +21,6 @@ export const getPostsQuery = graphql`
           gatsbyImageData(layout: FIXED, placeholder: BLURRED, width: 144, height: 144)
           publicUrl
         }
-        dpThumbnail {
-          gatsbyImageData(layout: FIXED, placeholder: BLURRED, width: 600, height: 300)
-          publicUrl
-        }
-        content {
-          content
-        }
       }
     }
   }
@@ -43,15 +36,14 @@ export const HomeIndex = ({ data }: PageProps<GetPostsQuery>) => {
           title: article.title,
           description: article.description,
           tags: article.tags.map((tag) => {
-            console.log(tag);
             return tagTypeMapper(tag);
           }),
           types: articleTypeMapper(article.articleType),
+          slug: article.slug,
         };
       }),
     [articles],
   );
-  console.log(articleBriefItems);
 
   return (
     <div className="flex flex-col">
