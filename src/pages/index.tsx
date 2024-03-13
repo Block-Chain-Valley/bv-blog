@@ -1,12 +1,12 @@
-import { HomeIndexQuery } from "@/graphql";
+import { GetPostsQuery } from "@/graphql";
 import { Banner, Footer, Header, HomeBody } from "@/layouts";
 import { articleTypeMapper, tagTypeMapper } from "@/utils/mapper";
 import { PageProps, graphql } from "gatsby";
 import { IGatsbyImageData } from "gatsby-plugin-image";
 import React, { useMemo } from "react";
 
-export const homeQuery = graphql`
-  query HomeIndex {
+export const getPostsQuery = graphql`
+  query GetPosts {
     allContentfulPost(sort: { createdAt: DESC }) {
       nodes {
         id
@@ -33,7 +33,7 @@ export const homeQuery = graphql`
   }
 `;
 
-export const HomeIndex = ({ data }: PageProps<HomeIndexQuery>) => {
+export const HomeIndex = ({ data }: PageProps<GetPostsQuery>) => {
   const articles = data.allContentfulPost.nodes;
   const articleBriefItems = useMemo(
     () =>
