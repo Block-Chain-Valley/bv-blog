@@ -1,3 +1,4 @@
+import Popup from "@/components/Popup/Popup";
 import { GetPostBySlugQuery } from "@/graphql";
 import { Footer, Header, PostBody } from "@/layouts";
 import { teamMapper } from "@/utils/mapper";
@@ -40,22 +41,25 @@ export const Post = ({ data }: PageProps<GetPostBySlugQuery>) => {
   const team = teamMapper(rawTeam);
 
   return (
-    <div className="flex flex-col items-center">
-      <Header />
-      <PostBody
-        title={title}
-        articleType={articleType}
-        createdAt={createdAt}
-        thumbnail={dpThumbnail.gatsbyImageData}
-        body={body.body}
-        name={name}
-        team={team}
-        year={year}
-        profileText={profileText}
-        profileImage={profileImage.gatsbyImageData}
-      />
-      <Footer />
-    </div>
+    <>
+      <Popup />
+      <div className="flex flex-col items-center">
+        <Header />
+        <PostBody
+          title={title}
+          articleType={articleType}
+          createdAt={createdAt}
+          thumbnail={dpThumbnail.gatsbyImageData}
+          body={body.body}
+          name={name}
+          team={team}
+          year={year}
+          profileText={profileText}
+          profileImage={profileImage.gatsbyImageData}
+        />
+        <Footer />
+      </div>
+    </>
   );
 };
 

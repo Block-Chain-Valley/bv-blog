@@ -67,6 +67,30 @@ input[type="search"]::-webkit-search-results-decoration {
   display: none;
 }
 
+@keyframes fadeout {
+  0% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@layer utilities {
+  .animate-fadeout {
+    animation-name: fadeout;
+    animation-duration: 3s;
+    animation-iteration-count: 1;
+    animation-fill-mode: both;
+  }
+}
+
 .no-scroll {
   overflow: hidden;
   position: fixed;

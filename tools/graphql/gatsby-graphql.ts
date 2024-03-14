@@ -685,6 +685,53 @@ export type ContentfulUserSysContentTypeSys = {
   id?: Maybe<Scalars['String']>;
 };
 
+export type ContentfulBanner = ContentfulReference & ContentfulEntry & Node & {
+  contentful_id: Scalars['String'];
+  id: Scalars['ID'];
+  node_locale: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  banner?: Maybe<ContentfulAsset>;
+  spaceId?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['Date']>;
+  updatedAt?: Maybe<Scalars['Date']>;
+  sys?: Maybe<ContentfulBannerSys>;
+  parent?: Maybe<Node>;
+  children: Array<Node>;
+  internal: Internal;
+};
+
+
+export type ContentfulBannerCreatedAtArgs = {
+  formatString?: InputMaybe<Scalars['String']>;
+  fromNow?: InputMaybe<Scalars['Boolean']>;
+  difference?: InputMaybe<Scalars['String']>;
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+export type ContentfulBannerUpdatedAtArgs = {
+  formatString?: InputMaybe<Scalars['String']>;
+  fromNow?: InputMaybe<Scalars['Boolean']>;
+  difference?: InputMaybe<Scalars['String']>;
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+export type ContentfulBannerSys = {
+  type?: Maybe<Scalars['String']>;
+  revision?: Maybe<Scalars['Int']>;
+  contentType?: Maybe<ContentfulBannerSysContentType>;
+};
+
+export type ContentfulBannerSysContentType = {
+  sys?: Maybe<ContentfulBannerSysContentTypeSys>;
+};
+
+export type ContentfulBannerSysContentTypeSys = {
+  type?: Maybe<Scalars['String']>;
+  linkType?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
+};
+
 export type MarkdownHeading = {
   id?: Maybe<Scalars['String']>;
   value?: Maybe<Scalars['String']>;
@@ -1080,6 +1127,8 @@ export type Query = {
   allContentfulPost: ContentfulPostConnection;
   contentfulUser?: Maybe<ContentfulUser>;
   allContentfulUser: ContentfulUserConnection;
+  contentfulBanner?: Maybe<ContentfulBanner>;
+  allContentfulBanner: ContentfulBannerConnection;
   markdownRemark?: Maybe<MarkdownRemark>;
   allMarkdownRemark: MarkdownRemarkConnection;
   imageSharp?: Maybe<ImageSharp>;
@@ -1414,6 +1463,30 @@ export type QueryContentfulUserArgs = {
 export type QueryAllContentfulUserArgs = {
   filter?: InputMaybe<ContentfulUserFilterInput>;
   sort?: InputMaybe<Array<InputMaybe<ContentfulUserSortInput>>>;
+  skip?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']>;
+};
+
+
+export type QueryContentfulBannerArgs = {
+  contentful_id?: InputMaybe<StringQueryOperatorInput>;
+  id?: InputMaybe<StringQueryOperatorInput>;
+  node_locale?: InputMaybe<StringQueryOperatorInput>;
+  name?: InputMaybe<StringQueryOperatorInput>;
+  banner?: InputMaybe<ContentfulAssetFilterInput>;
+  spaceId?: InputMaybe<StringQueryOperatorInput>;
+  createdAt?: InputMaybe<DateQueryOperatorInput>;
+  updatedAt?: InputMaybe<DateQueryOperatorInput>;
+  sys?: InputMaybe<ContentfulBannerSysFilterInput>;
+  parent?: InputMaybe<NodeFilterInput>;
+  children?: InputMaybe<NodeFilterListInput>;
+  internal?: InputMaybe<InternalFilterInput>;
+};
+
+
+export type QueryAllContentfulBannerArgs = {
+  filter?: InputMaybe<ContentfulBannerFilterInput>;
+  sort?: InputMaybe<Array<InputMaybe<ContentfulBannerSortInput>>>;
   skip?: InputMaybe<Scalars['Int']>;
   limit?: InputMaybe<Scalars['Int']>;
 };
@@ -3822,6 +3895,185 @@ export type ContentfulUserSysContentTypeSysSortInput = {
   id?: InputMaybe<SortOrderEnum>;
 };
 
+export type ContentfulBannerSysFilterInput = {
+  type?: InputMaybe<StringQueryOperatorInput>;
+  revision?: InputMaybe<IntQueryOperatorInput>;
+  contentType?: InputMaybe<ContentfulBannerSysContentTypeFilterInput>;
+};
+
+export type ContentfulBannerSysContentTypeFilterInput = {
+  sys?: InputMaybe<ContentfulBannerSysContentTypeSysFilterInput>;
+};
+
+export type ContentfulBannerSysContentTypeSysFilterInput = {
+  type?: InputMaybe<StringQueryOperatorInput>;
+  linkType?: InputMaybe<StringQueryOperatorInput>;
+  id?: InputMaybe<StringQueryOperatorInput>;
+};
+
+export type ContentfulBannerConnection = {
+  totalCount: Scalars['Int'];
+  edges: Array<ContentfulBannerEdge>;
+  nodes: Array<ContentfulBanner>;
+  pageInfo: PageInfo;
+  distinct: Array<Scalars['String']>;
+  max?: Maybe<Scalars['Float']>;
+  min?: Maybe<Scalars['Float']>;
+  sum?: Maybe<Scalars['Float']>;
+  group: Array<ContentfulBannerGroupConnection>;
+};
+
+
+export type ContentfulBannerConnectionDistinctArgs = {
+  field: ContentfulBannerFieldSelector;
+};
+
+
+export type ContentfulBannerConnectionMaxArgs = {
+  field: ContentfulBannerFieldSelector;
+};
+
+
+export type ContentfulBannerConnectionMinArgs = {
+  field: ContentfulBannerFieldSelector;
+};
+
+
+export type ContentfulBannerConnectionSumArgs = {
+  field: ContentfulBannerFieldSelector;
+};
+
+
+export type ContentfulBannerConnectionGroupArgs = {
+  skip?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']>;
+  field: ContentfulBannerFieldSelector;
+};
+
+export type ContentfulBannerEdge = {
+  next?: Maybe<ContentfulBanner>;
+  node: ContentfulBanner;
+  previous?: Maybe<ContentfulBanner>;
+};
+
+export type ContentfulBannerFieldSelector = {
+  contentful_id?: InputMaybe<FieldSelectorEnum>;
+  id?: InputMaybe<FieldSelectorEnum>;
+  node_locale?: InputMaybe<FieldSelectorEnum>;
+  name?: InputMaybe<FieldSelectorEnum>;
+  banner?: InputMaybe<ContentfulAssetFieldSelector>;
+  spaceId?: InputMaybe<FieldSelectorEnum>;
+  createdAt?: InputMaybe<FieldSelectorEnum>;
+  updatedAt?: InputMaybe<FieldSelectorEnum>;
+  sys?: InputMaybe<ContentfulBannerSysFieldSelector>;
+  parent?: InputMaybe<NodeFieldSelector>;
+  children?: InputMaybe<NodeFieldSelector>;
+  internal?: InputMaybe<InternalFieldSelector>;
+};
+
+export type ContentfulBannerSysFieldSelector = {
+  type?: InputMaybe<FieldSelectorEnum>;
+  revision?: InputMaybe<FieldSelectorEnum>;
+  contentType?: InputMaybe<ContentfulBannerSysContentTypeFieldSelector>;
+};
+
+export type ContentfulBannerSysContentTypeFieldSelector = {
+  sys?: InputMaybe<ContentfulBannerSysContentTypeSysFieldSelector>;
+};
+
+export type ContentfulBannerSysContentTypeSysFieldSelector = {
+  type?: InputMaybe<FieldSelectorEnum>;
+  linkType?: InputMaybe<FieldSelectorEnum>;
+  id?: InputMaybe<FieldSelectorEnum>;
+};
+
+export type ContentfulBannerGroupConnection = {
+  totalCount: Scalars['Int'];
+  edges: Array<ContentfulBannerEdge>;
+  nodes: Array<ContentfulBanner>;
+  pageInfo: PageInfo;
+  distinct: Array<Scalars['String']>;
+  max?: Maybe<Scalars['Float']>;
+  min?: Maybe<Scalars['Float']>;
+  sum?: Maybe<Scalars['Float']>;
+  group: Array<ContentfulBannerGroupConnection>;
+  field: Scalars['String'];
+  fieldValue?: Maybe<Scalars['String']>;
+};
+
+
+export type ContentfulBannerGroupConnectionDistinctArgs = {
+  field: ContentfulBannerFieldSelector;
+};
+
+
+export type ContentfulBannerGroupConnectionMaxArgs = {
+  field: ContentfulBannerFieldSelector;
+};
+
+
+export type ContentfulBannerGroupConnectionMinArgs = {
+  field: ContentfulBannerFieldSelector;
+};
+
+
+export type ContentfulBannerGroupConnectionSumArgs = {
+  field: ContentfulBannerFieldSelector;
+};
+
+
+export type ContentfulBannerGroupConnectionGroupArgs = {
+  skip?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']>;
+  field: ContentfulBannerFieldSelector;
+};
+
+export type ContentfulBannerFilterInput = {
+  contentful_id?: InputMaybe<StringQueryOperatorInput>;
+  id?: InputMaybe<StringQueryOperatorInput>;
+  node_locale?: InputMaybe<StringQueryOperatorInput>;
+  name?: InputMaybe<StringQueryOperatorInput>;
+  banner?: InputMaybe<ContentfulAssetFilterInput>;
+  spaceId?: InputMaybe<StringQueryOperatorInput>;
+  createdAt?: InputMaybe<DateQueryOperatorInput>;
+  updatedAt?: InputMaybe<DateQueryOperatorInput>;
+  sys?: InputMaybe<ContentfulBannerSysFilterInput>;
+  parent?: InputMaybe<NodeFilterInput>;
+  children?: InputMaybe<NodeFilterListInput>;
+  internal?: InputMaybe<InternalFilterInput>;
+};
+
+export type ContentfulBannerSortInput = {
+  contentful_id?: InputMaybe<SortOrderEnum>;
+  id?: InputMaybe<SortOrderEnum>;
+  node_locale?: InputMaybe<SortOrderEnum>;
+  name?: InputMaybe<SortOrderEnum>;
+  banner?: InputMaybe<ContentfulAssetSortInput>;
+  spaceId?: InputMaybe<SortOrderEnum>;
+  createdAt?: InputMaybe<SortOrderEnum>;
+  updatedAt?: InputMaybe<SortOrderEnum>;
+  sys?: InputMaybe<ContentfulBannerSysSortInput>;
+  parent?: InputMaybe<NodeSortInput>;
+  children?: InputMaybe<NodeSortInput>;
+  internal?: InputMaybe<InternalSortInput>;
+};
+
+export type ContentfulBannerSysSortInput = {
+  type?: InputMaybe<SortOrderEnum>;
+  revision?: InputMaybe<SortOrderEnum>;
+  contentType?: InputMaybe<ContentfulBannerSysContentTypeSortInput>;
+};
+
+export type ContentfulBannerSysContentTypeSortInput = {
+  sys?: InputMaybe<ContentfulBannerSysContentTypeSysSortInput>;
+};
+
+export type ContentfulBannerSysContentTypeSysSortInput = {
+  type?: InputMaybe<SortOrderEnum>;
+  linkType?: InputMaybe<SortOrderEnum>;
+  id?: InputMaybe<SortOrderEnum>;
+};
+
 export type MarkdownRemarkConnection = {
   totalCount: Scalars['Int'];
   edges: Array<MarkdownRemarkEdge>;
@@ -4214,7 +4466,12 @@ export type ContentfulContentTypeSysSortInput = {
 export type GetPostsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetPostsQuery = { allContentfulPost: { nodes: Array<{ id: string, title?: string | null, description?: string | null, tags?: Array<string | null> | null, articleType?: string | null, slug?: string | null, createdAt?: any | null, userEmail?: string | null, homeThumbnail?: { gatsbyImageData?: any | null, publicUrl: string } | null }> } };
+export type GetPostsQuery = { allContentfulPost: { nodes: Array<{ id: string, title?: string | null, description?: string | null, tags?: Array<string | null> | null, articleType?: string | null, slug?: string | null, createdAt?: any | null, userEmail?: string | null, homeThumbnail?: { gatsbyImageData?: any | null, publicUrl: string } | null }> }, allContentfulBanner: { nodes: Array<{ banner?: { gatsbyImageData?: any | null } | null }> } };
+
+export type GetTechIndexQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetTechIndexQuery = { allContentfulPost: { nodes: Array<{ id: string, title?: string | null, description?: string | null, tags?: Array<string | null> | null, articleType?: string | null, slug?: string | null, createdAt?: any | null, userEmail?: string | null, homeThumbnail?: { gatsbyImageData?: any | null, publicUrl: string } | null }> } };
 
 export type GetPostBySlugQueryVariables = Exact<{
   slug: Scalars['String'];
