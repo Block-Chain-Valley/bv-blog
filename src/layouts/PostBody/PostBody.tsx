@@ -2,7 +2,7 @@ import Markdown from "@/components/Markdown/Markdown";
 import Profile from "@/components/Profile/Profile";
 import ProfileLarge from "@/components/Profile/ProfileLarge";
 import ShareButton from "@/components/ShareButton/ShareButton";
-import { Team } from "@/utils/types";
+import { Team } from "@/utils";
 import { GatsbyImage, IGatsbyImageData } from "gatsby-plugin-image";
 import React from "react";
 

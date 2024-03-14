@@ -2,8 +2,14 @@ import type { GatsbyConfig } from "gatsby";
 
 const config: GatsbyConfig = {
   siteMetadata: {
-    title: `bv-tech-blog`,
-    siteUrl: `https://www.yourdomain.tld`,
+    title: `블록체인 밸리 블로그`,
+    author: `blockchainvalley`,
+    description: "고려대학교 블록체인 학회 블록체인 밸리 블로그입니다.",
+    siteUrl: `https://block-chain-valley.com`,
+    og: {
+      siteName: "블록체인 밸리 블로그",
+      twitterCreator: "@blockchainkor",
+    },
   },
   // More easily incorporate content into your pages through automatic TypeScript type generation and better GraphQL IntelliSense.
   // If you use VSCode you can also use the GraphQL plugin
@@ -51,6 +57,14 @@ const config: GatsbyConfig = {
         path: "./src/pages/",
       },
       __key: "pages",
+    },
+    {
+      resolve: "gatsby-plugin-robots-txt",
+      options: {
+        host: "https://block-chain-valley.com",
+        sitemap: "https://block-chain-valley.com/sitemap-index.xml",
+        policy: [{ userAgent: "*", allow: "/" }],
+      },
     },
   ],
 };

@@ -1,5 +1,5 @@
 import ArticleGroup from "@/components/Article/ArticleGroup";
-import { Article, ArticleItemTypes, TagTypes } from "@/utils/types";
+import { Article, ArticleItemTypes } from "@/utils";
 import { navigate } from "gatsby";
 import React from "react";
 

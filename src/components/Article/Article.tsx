@@ -1,4 +1,4 @@
-import { ArticleItemTypes } from "@/utils/types";
+import { ArticleItemTypes } from "@/utils";
 import clsx from "clsx";
 import { navigate } from "gatsby";
 import { GatsbyImage } from "gatsby-plugin-image";
@@ -21,7 +21,7 @@ export const Article = ({ image, title, description, tags, slug }: ArticleProps)
       <div className="flex flex-col items-start gap-5">
         <button
           type="button"
-          className={clsx("text-24/semi-bold soft-transition text-theme-black", isHovered && "text-theme-primary")}
+          className={clsx("soft-transition text-24/semi-bold text-theme-black", isHovered && "text-theme-primary")}
           onClick={() => {
             navigate(`/post/${slug}`);
           }}

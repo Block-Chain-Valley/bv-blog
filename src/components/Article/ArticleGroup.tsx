@@ -1,4 +1,4 @@
-import { ArticleItemTypes } from "@/utils/types";
+import { ArticleItemTypes } from "@/utils";
 import React from "react";
 import Article from "./Article";
 import MoreArticleButton from "./MoreArticleButton";

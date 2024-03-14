@@ -6,6 +6,7 @@ export interface ToastProps {
   message: string;
   isPositive: boolean;
 }
+
 export default function Toast({ message, isPositive }: ToastProps) {
   const { setToastContext } = useToastContext();
   const clearToast = () => {
@@ -44,22 +45,3 @@ export default function Toast({ message, isPositive }: ToastProps) {
     </div>
   );
 }
-
-// .default_toast {
-//     display: inline-flex;
-//     padding: 12px 30px 12px 20px;
-//     flex-direction: column;
-//     align-items: flex-start;
-//     gap: 10px;
-//     border-radius: 20px;
-//     background: var(--Transparent-Dark);
-//     position: fixed;
-//     top: 20px;
-//     z-index: 21;
-//     color: var(--White, #fff);
-//     @extend %medium_M;
-//     animation-name: fadeout;
-//     animation-duration: 5s;
-//     animation-iteration-count: 1;
-//     animation-fill-mode: both;
-//   }

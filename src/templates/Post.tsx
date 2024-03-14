@@ -1,7 +1,8 @@
 import Popup from "@/components/Popup/Popup";
+import Seo from "@/components/Seo/Seo";
 import { GetPostBySlugQuery } from "@/graphql";
 import { Footer, Header, PostBody } from "@/layouts";
-import { teamMapper } from "@/utils/mapper";
+import { blogConfig, teamMapper } from "@/utils";
 import { PageProps, graphql } from "gatsby";
 import React from "react";
 
@@ -42,6 +43,7 @@ export const Post = ({ data }: PageProps<GetPostBySlugQuery>) => {
 
   return (
     <>
+      <Seo title={title} description={blogConfig.description} featuredImage={dpThumbnail.gatsbyImageData} />
       <Popup />
       <div className="flex flex-col items-center">
         <Header />

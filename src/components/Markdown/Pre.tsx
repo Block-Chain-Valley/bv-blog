@@ -1,4 +1,4 @@
-import React, { ClassAttributes, HTMLAttributes, ReactElement } from "react";
+import React, { ClassAttributes, HTMLAttributes } from "react";
 import { ExtraProps } from "react-markdown";
 
 export const Pre = (props: ClassAttributes<HTMLPreElement> & HTMLAttributes<HTMLPreElement> & ExtraProps) => {

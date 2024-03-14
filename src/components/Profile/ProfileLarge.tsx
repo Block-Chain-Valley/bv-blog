@@ -1,5 +1,4 @@
-import { yearMapper } from "@/utils/mapper";
-import { Team } from "@/utils/types";
+import { Team, yearMapper } from "@/utils";
 import { GatsbyImage, IGatsbyImageData } from "gatsby-plugin-image";
 import React from "react";
 

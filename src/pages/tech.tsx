@@ -1,7 +1,8 @@
 import Popup from "@/components/Popup/Popup";
+import Seo from "@/components/Seo/Seo";
 import { GetTechIndexQuery } from "@/graphql";
 import { Footer, Header, HomeBody } from "@/layouts";
-import { articleTypeMapper, tagTypeMapper } from "@/utils/mapper";
+import { articleTypeMapper, blogConfig, tagTypeMapper } from "@/utils";
 import { PageProps, graphql } from "gatsby";
 import { IGatsbyImageData } from "gatsby-plugin-image";
 import React, { useMemo } from "react";
@@ -48,6 +49,7 @@ export const TechIndex = ({ data }: PageProps<GetTechIndexQuery>) => {
 
   return (
     <>
+      <Seo title={blogConfig.title} description={blogConfig.description} />
       <Popup />
       <div className="flex flex-col items-center">
         <Header />

@@ -275,7 +275,14 @@ export type SiteGraphqlTypegen = {
 export type SiteSiteMetadata = {
   title?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
+  author?: Maybe<Scalars['String']>;
   siteUrl?: Maybe<Scalars['String']>;
+  og?: Maybe<SiteSiteMetadataOg>;
+};
+
+export type SiteSiteMetadataOg = {
+  siteName?: Maybe<Scalars['String']>;
+  twitterCreator?: Maybe<Scalars['String']>;
 };
 
 export type SiteFunction = Node & {
@@ -2299,7 +2306,14 @@ export type DirectorySortInput = {
 export type SiteSiteMetadataFilterInput = {
   title?: InputMaybe<StringQueryOperatorInput>;
   description?: InputMaybe<StringQueryOperatorInput>;
+  author?: InputMaybe<StringQueryOperatorInput>;
   siteUrl?: InputMaybe<StringQueryOperatorInput>;
+  og?: InputMaybe<SiteSiteMetadataOgFilterInput>;
+};
+
+export type SiteSiteMetadataOgFilterInput = {
+  siteName?: InputMaybe<StringQueryOperatorInput>;
+  twitterCreator?: InputMaybe<StringQueryOperatorInput>;
 };
 
 export type SiteGraphqlTypegenFilterInput = {
@@ -2372,7 +2386,14 @@ export type SiteFieldSelector = {
 export type SiteSiteMetadataFieldSelector = {
   title?: InputMaybe<FieldSelectorEnum>;
   description?: InputMaybe<FieldSelectorEnum>;
+  author?: InputMaybe<FieldSelectorEnum>;
   siteUrl?: InputMaybe<FieldSelectorEnum>;
+  og?: InputMaybe<SiteSiteMetadataOgFieldSelector>;
+};
+
+export type SiteSiteMetadataOgFieldSelector = {
+  siteName?: InputMaybe<FieldSelectorEnum>;
+  twitterCreator?: InputMaybe<FieldSelectorEnum>;
 };
 
 export type SiteGraphqlTypegenFieldSelector = {
@@ -2457,7 +2478,14 @@ export type SiteSortInput = {
 export type SiteSiteMetadataSortInput = {
   title?: InputMaybe<SortOrderEnum>;
   description?: InputMaybe<SortOrderEnum>;
+  author?: InputMaybe<SortOrderEnum>;
   siteUrl?: InputMaybe<SortOrderEnum>;
+  og?: InputMaybe<SiteSiteMetadataOgSortInput>;
+};
+
+export type SiteSiteMetadataOgSortInput = {
+  siteName?: InputMaybe<SortOrderEnum>;
+  twitterCreator?: InputMaybe<SortOrderEnum>;
 };
 
 export type SiteGraphqlTypegenSortInput = {
@@ -4462,6 +4490,11 @@ export type ContentfulContentTypeSortInput = {
 export type ContentfulContentTypeSysSortInput = {
   type?: InputMaybe<SortOrderEnum>;
 };
+
+export type SeoMetaDataQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type SeoMetaDataQuery = { site?: { siteMetadata?: { title?: string | null, description?: string | null, siteUrl?: string | null, og?: { siteName?: string | null, twitterCreator?: string | null } | null } | null } | null, featuredImage?: { childImageSharp?: { gatsbyImageData: any } | null } | null };
 
 export type GetPostsQueryVariables = Exact<{ [key: string]: never; }>;
 
