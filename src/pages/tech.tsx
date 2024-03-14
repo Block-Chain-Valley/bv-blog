@@ -1,15 +1,14 @@
 import Popup from "@/components/Popup/Popup";
-import Toast from "@/components/Popup/Toast";
-import { GetPostsQuery } from "@/graphql";
-import { Banner, Footer, Header, HomeBody } from "@/layouts";
+import { GetTechIndexQuery } from "@/graphql";
+import { Footer, Header, HomeBody } from "@/layouts";
 import { articleTypeMapper, tagTypeMapper } from "@/utils/mapper";
 import { PageProps, graphql } from "gatsby";
 import { IGatsbyImageData } from "gatsby-plugin-image";
 import React, { useMemo } from "react";
 
-export const getPostsQuery = graphql`
-  query GetPosts {
-    allContentfulPost(sort: { createdAt: DESC }, limit: 5) {
+export const getTechIndexQuery = graphql`
+  query GetTechIndex {
+    allContentfulPost(filter: { articleType: { eq: "Tech" } }, sort: { createdAt: DESC }, limit: 10) {
       nodes {
         id
         title
@@ -25,17 +24,10 @@ export const getPostsQuery = graphql`
         }
       }
     }
-    allContentfulBanner {
-      nodes {
-        banner {
-          gatsbyImageData
-        }
-      }
-    }
   }
 `;
 
-export const HomeIndex = ({ data }: PageProps<GetPostsQuery>) => {
+export const TechIndex = ({ data }: PageProps<GetTechIndexQuery>) => {
   const articles = data.allContentfulPost.nodes;
   const articleBriefItems = useMemo(
     () =>
@@ -53,19 +45,17 @@ export const HomeIndex = ({ data }: PageProps<GetPostsQuery>) => {
       }),
     [articles],
   );
-  const banner = data.allContentfulBanner.nodes.at(0).banner.gatsbyImageData as IGatsbyImageData;
 
   return (
     <>
       <Popup />
       <div className="flex flex-col items-center">
         <Header />
-        <Banner banner={banner} />
-        <HomeBody articleBriefItems={articleBriefItems} />
+        <HomeBody articleBriefItems={articleBriefItems} isHome={false} />
         <Footer />
       </div>
     </>
   );
 };
 
-export default HomeIndex;
+export default TechIndex;

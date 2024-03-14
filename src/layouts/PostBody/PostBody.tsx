@@ -48,7 +48,7 @@ export const PostBody = ({
         <div className="text-20/semi-bold text-theme-black">도움이 되는 아티클이었나요?</div>
         <div className="flex items-center justify-between self-stretch">
           <ProfileLarge profileImage={profileImage} name={name} team={team} year={year} profileText={profileText} />
-          <ShareButton description="이 아티클 공유하기" handleClick={() => {}} />
+          <ShareButton description="이 아티클 공유하기" />
         </div>
       </div>
     </div>
