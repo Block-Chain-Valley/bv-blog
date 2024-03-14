@@ -7,9 +7,15 @@ export interface ArticleGroupProps {
   groupTitle: string;
   articleBriefItems: ArticleItemTypes[];
   moreButtonVisible?: boolean;
+  handleMoreButtonClick?: () => void;
 }
 
-export const ArticleGroup = ({ groupTitle, articleBriefItems, moreButtonVisible = true }: ArticleGroupProps) => {
+export const ArticleGroup = ({
+  groupTitle,
+  articleBriefItems,
+  moreButtonVisible = true,
+  handleMoreButtonClick,
+}: ArticleGroupProps) => {
   return (
     <div className="flex w-full flex-col items-start gap-10 py-10">
       {/* 제목 */}
@@ -23,7 +29,7 @@ export const ArticleGroup = ({ groupTitle, articleBriefItems, moreButtonVisible 
       {/* 더 많은 아티클 보기 버튼 */}
       {moreButtonVisible && (
         <div className="flex flex-col items-center justify-center gap-2.5 self-stretch">
-          <MoreArticleButton />
+          <MoreArticleButton description="더 많은 아티클 보기" handleClick={handleMoreButtonClick} />
         </div>
       )}
     </div>
