@@ -1,13 +1,20 @@
+import { useMobileContext } from "@/context/MobileContext";
+import clsx from "clsx";
 import { StaticImage } from "gatsby-plugin-image";
 import React from "react";
 
 export const Footer = () => {
+  const { isMobile } = useMobileContext();
   return (
-    <div className="flex w-full flex-col items-start gap-[60px] px-[120px] pb-[60px] pt-0">
+    <div
+      className={clsx("flex w-full flex-col items-start gap-[60px] pb-[60px] pt-0", isMobile ? "px-8" : "px-[120px]")}
+    >
       {/* Divider */}
       <div className="h-[1px] self-stretch bg-theme-lightGray"></div>
       {/* Footer Content */}
-      <div className="flex items-center justify-between self-stretch">
+      <div
+        className={clsx("flex self-stretch", isMobile ? "flex-col items-start gap-5" : "items-center justify-between")}
+      >
         {/* Info */}
         <div className="flex flex-col items-start gap-5 text-theme-black">
           <div className="flex flex-col items-start gap-2.5">
@@ -49,7 +56,12 @@ export const Footer = () => {
           </div>
         </div>
         {/* Copyright */}
-        <div className="flex flex-col items-end justify-center gap-2.5 text-13/regular text-theme-gray">
+        <div
+          className={clsx(
+            "flex flex-col justify-center gap-2.5 text-13/regular text-theme-gray",
+            isMobile ? "items-start" : "items-end",
+          )}
+        >
           <p>Copyright © 블록체인 밸리 All Right Reserved.</p>
           <p>이메일 | contact@blockchainvalley.ac</p>
         </div>

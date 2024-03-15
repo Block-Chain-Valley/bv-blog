@@ -1,4 +1,5 @@
-import { TagTypes } from "@/utils/types";
+import { useMobileContext } from "@/context/MobileContext";
+import { TagTypes } from "@/utils";
 import clsx from "clsx";
 import React from "react";
 
@@ -18,11 +19,12 @@ const getTagClasses = (type: TagTypes) => {
 };
 
 export const Tag = ({ type }: { type: TagTypes }) => {
+  const { isMobile } = useMobileContext();
   return (
     <div
       className={clsx(
-        "inline-flex items-center justify-center gap-2.5 rounded-[4px] px-3 py-1",
-        "text-13/regular text-theme-white",
+        "inline-flex items-center justify-center gap-2.5 rounded-[4px] px-3 py-1 text-theme-white",
+        isMobile ? "text-10/regular" : "text-13/regular",
         getTagClasses(type),
       )}
     >

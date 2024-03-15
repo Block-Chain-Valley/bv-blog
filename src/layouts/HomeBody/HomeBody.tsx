@@ -1,5 +1,7 @@
 import ArticleGroup from "@/components/Article/ArticleGroup";
+import { useMobileContext } from "@/context/MobileContext";
 import { Article, ArticleItemTypes } from "@/utils";
+import clsx from "clsx";
 import { navigate } from "gatsby";
 import React from "react";
 
@@ -9,11 +11,17 @@ export interface HomeBodyProps {
 }
 
 export const HomeBody = ({ articleBriefItems, isHome = true }: HomeBodyProps) => {
+  const { isMobile } = useMobileContext();
+
   return (
-    <div className="flex w-[1000px] flex-col items-start py-10">
+    <div className={clsx("flex flex-col items-start", isMobile ? "w-full px-8 py-2.5" : "w-[1000px] py-10")}>
       {/* Recent */}
       {isHome && (
-        <ArticleGroup groupTitle="Recent" articleBriefItems={[articleBriefItems.at(0)]} moreButtonVisible={false} />
+        <ArticleGroup
+          groupTitle="최근 게시글"
+          articleBriefItems={[articleBriefItems.at(0)]}
+          moreButtonVisible={false}
+        />
       )}
       {/* Tech */}
       <ArticleGroup

@@ -1,6 +1,7 @@
 import Popup from "@/components/Popup/Popup";
 import Toast from "@/components/Popup/Toast";
 import Seo from "@/components/Seo/Seo";
+import { useMobileContext } from "@/context/MobileContext";
 import { GetPostsQuery } from "@/graphql";
 import { Banner, Footer, Header, HomeBody } from "@/layouts";
 import { articleTypeMapper, blogConfig, tagTypeMapper } from "@/utils";
@@ -37,6 +38,8 @@ export const getPostsQuery = graphql`
 `;
 
 export const HomeIndex = ({ data }: PageProps<GetPostsQuery>) => {
+  const { isMobile } = useMobileContext();
+
   const articles = data.allContentfulPost.nodes;
   const articleBriefItems = useMemo(
     () =>
@@ -62,7 +65,7 @@ export const HomeIndex = ({ data }: PageProps<GetPostsQuery>) => {
       <Popup />
       <div className="flex flex-col items-center">
         <Header />
-        <Banner banner={banner} />
+        {!isMobile && <Banner banner={banner} />}
         <HomeBody articleBriefItems={articleBriefItems} />
         <Footer />
       </div>

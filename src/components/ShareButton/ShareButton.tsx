@@ -1,3 +1,4 @@
+import { useMobileContext } from "@/context/MobileContext";
 import { useToastContext } from "@/context/ToastContext";
 import { useLocation } from "@reach/router";
 import copy from "copy-to-clipboard";
@@ -10,13 +11,19 @@ export interface ShareButtonProps {
 }
 
 export const ShareButton = ({ description }: ShareButtonProps) => {
+  const { isMobile } = useMobileContext();
   const { setToastContext } = useToastContext();
   const location = useLocation();
   const fullUrl = `${location.origin}${location.pathname}${location.search}${location.hash}`;
 
   const handleClick = () => {
     copy(fullUrl);
-    setToastContext(<Toast message="이 아티클 페이지의 주소를 클립보드에 복사했어요." isPositive={true} />);
+    setToastContext(
+      <Toast
+        message={isMobile ? "아티클 링크를 복사했어요." : "이 아티클의 링크를 클립보드에 복사했어요."}
+        isPositive={true}
+      />,
+    );
   };
 
   return (

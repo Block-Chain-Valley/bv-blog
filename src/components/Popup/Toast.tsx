@@ -39,7 +39,6 @@ export default function Toast({ message, isPositive }: ToastProps) {
             loading="eager"
           />
         )}
-
         <div className="text-16/regular text-theme-white">{message}</div>
       </div>
     </div>
