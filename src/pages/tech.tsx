@@ -53,7 +53,6 @@ export const TechIndex = ({ data }: PageProps<GetTechIndexQuery>) => {
 
   return (
     <>
-      <Seo title={blogConfig.title} description={blogConfig.description} />
       <Popup />
       <div className="flex flex-col items-center">
         <Header />
@@ -62,6 +61,10 @@ export const TechIndex = ({ data }: PageProps<GetTechIndexQuery>) => {
       </div>
     </>
   );
+};
+
+export const Head = () => {
+  return <Seo title={blogConfig.title} description={blogConfig.description} />;
 };
 
 export default TechIndex;
