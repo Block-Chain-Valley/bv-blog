@@ -8,7 +8,7 @@ interface MobileContextType {
 }
 
 const MobileContext = createContext<MobileContextType>({
-  isMobile: false,
+  isMobile: true,
   isTablet: false,
   setIsMobile: () => {},
   setIsTablet: () => {},
