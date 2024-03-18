@@ -1,5 +1,7 @@
+import Seo from "@/components/Seo/Seo";
 import { useMobileContext } from "@/context/MobileContext";
 import { Header } from "@/layouts";
+import { blogConfig } from "@/utils";
 import { PageProps, navigate } from "gatsby";
 import { StaticImage } from "gatsby-plugin-image";
 import React, { useEffect } from "react";
@@ -13,6 +15,7 @@ const NotFoundPage: React.FC<PageProps> = () => {
 
   return (
     <>
+      <Seo title={blogConfig.title} description={blogConfig.description} />
       <div className="flex h-screen w-screen flex-col items-center justify-center gap-5">
         {isMobile ? (
           <StaticImage src="../assets/images/Cat.png" alt="Cat" placeholder="none" layout="fixed" height={144} />

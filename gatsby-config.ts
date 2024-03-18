@@ -1,13 +1,15 @@
 import type { GatsbyConfig } from "gatsby";
 import adapter from "gatsby-adapter-netlify";
 
+// TODO: 도메인 등록 후 수정
+
 const config: GatsbyConfig = {
   adapter: adapter(),
   siteMetadata: {
     title: `블록체인 밸리 블로그`,
     author: `blockchainvalley`,
     description: "고려대학교 블록체인 학회 블록체인 밸리 블로그입니다.",
-    siteUrl: `https://block-chain-valley.com`,
+    siteUrl: `https://blockchainvalley.netlify.app/`,
     og: {
       siteName: "블록체인 밸리 블로그",
       twitterCreator: "@blockchainkor",
@@ -23,6 +25,18 @@ const config: GatsbyConfig = {
       options: {
         accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
         spaceId: process.env.CONTENTFUL_SPACE_ID,
+      },
+    },
+    {
+      resolve: `gatsby-omni-font-loader`,
+      options: {
+        enableListener: true,
+        web: [
+          {
+            name: `Pretendard`,
+            file: `https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/variable/pretendardvariable-dynamic-subset.css`,
+          },
+        ],
       },
     },
     `gatsby-transformer-remark`,
@@ -63,8 +77,8 @@ const config: GatsbyConfig = {
     {
       resolve: "gatsby-plugin-robots-txt",
       options: {
-        host: "https://block-chain-valley.com",
-        sitemap: "https://block-chain-valley.com/sitemap-index.xml",
+        host: "https://blockchainvalley.netlify.app/",
+        sitemap: "https://blockchainvalley.netlify.app/sitemap-index.xml",
         policy: [{ userAgent: "*", allow: "/" }],
       },
     },
