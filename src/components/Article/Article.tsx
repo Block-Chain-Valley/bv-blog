@@ -2,7 +2,7 @@ import { useMobileContext } from "@/context/MobileContext";
 import { ArticleItemTypes } from "@/utils";
 import clsx from "clsx";
 import { navigate } from "gatsby";
-import { GatsbyImage } from "gatsby-plugin-image";
+import { GatsbyImage, IGatsbyImageData } from "gatsby-plugin-image";
 import React, { useState } from "react";
 import Tag from "../Tag/Tag";
 
@@ -11,12 +11,15 @@ export type ArticleProps = ArticleItemTypes;
 export const Article = ({ image, title, description, tags, slug }: ArticleProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const { isMobile } = useMobileContext();
+  const thumbnailOptions: Partial<IGatsbyImageData> = isMobile
+    ? { layout: "constrained" }
+    : { layout: "fixed", width: 196, height: 196 };
 
   return (
     <div className={clsx("flex w-full", isMobile ? "flex-col items-start gap-5" : "items-center gap-14")}>
       {/* Image */}
       <GatsbyImage
-        image={{ ...image, layout: "fixed", width: isMobile ? 144 : 196, height: isMobile ? 144 : 196 }}
+        image={{ ...image, ...thumbnailOptions }}
         alt="article"
         className={clsx("move-transition", isHovered && "translate-y-[-8px]")}
       />

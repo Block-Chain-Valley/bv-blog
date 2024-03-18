@@ -2,28 +2,38 @@ import React, { Dispatch, SetStateAction, createContext, useContext, useEffect, 
 
 interface MobileContextType {
   isMobile: boolean;
+  isTablet: boolean;
   setIsMobile: Dispatch<SetStateAction<boolean>>;
+  setIsTablet: Dispatch<SetStateAction<boolean>>;
 }
 
-const MobileContext = createContext<MobileContextType>({ isMobile: false, setIsMobile: () => {} });
+const MobileContext = createContext<MobileContextType>({
+  isMobile: false,
+  isTablet: false,
+  setIsMobile: () => {},
+  setIsTablet: () => {},
+});
 
 const MobileProvider = ({ children }) => {
   const [isMobile, setIsMobile] = useState(false);
+  const [isTablet, setIsTablet] = useState(false);
 
   const providerValue = useMemo(
     () => ({
       isMobile,
+      isTablet,
       setIsMobile,
+      setIsTablet,
     }),
-    [isMobile, setIsMobile],
+    [isMobile, isTablet, setIsMobile, setIsTablet],
   );
 
   useEffect(() => {
-    setIsMobile(window.innerWidth <= 1000);
-
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 1000);
+      setIsTablet(window.innerWidth >= 600 && window.innerWidth <= 1000);
     };
+    handleResize();
     window.addEventListener("resize", handleResize);
 
     return () => {

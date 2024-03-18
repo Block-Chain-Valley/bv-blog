@@ -1,5 +1,6 @@
 import Popup from "@/components/Popup/Popup";
 import Seo from "@/components/Seo/Seo";
+import { useMobileContext } from "@/context/MobileContext";
 import { GetTechIndexQuery } from "@/graphql";
 import { Footer, Header, HomeBody } from "@/layouts";
 import { articleTypeMapper, blogConfig, tagTypeMapper } from "@/utils";
@@ -19,9 +20,12 @@ export const getTechIndexQuery = graphql`
         slug
         createdAt(formatString: "YYYY.MM.DD")
         userEmail
-        homeThumbnail {
-          gatsbyImageData(layout: FIXED, placeholder: BLURRED, width: 144, height: 144)
+        squareThumbnail {
+          gatsbyImageData(layout: FIXED, placeholder: BLURRED)
           publicUrl
+        }
+        rectangleThumbnail {
+          gatsbyImageData(layout: FIXED, placeholder: BLURRED, width: 1000, height: 500)
         }
       }
     }
@@ -29,12 +33,16 @@ export const getTechIndexQuery = graphql`
 `;
 
 export const TechIndex = ({ data }: PageProps<GetTechIndexQuery>) => {
+  const { isMobile } = useMobileContext();
+
   const articles = data.allContentfulPost.nodes;
   const articleBriefItems = useMemo(
     () =>
       articles.map((article) => {
         return {
-          image: article.homeThumbnail.gatsbyImageData as IGatsbyImageData,
+          image: (isMobile
+            ? article.rectangleThumbnail.gatsbyImageData
+            : article.squareThumbnail.gatsbyImageData) as IGatsbyImageData,
           title: article.title,
           description: article.description,
           tags: article.tags.map((tag) => {
@@ -44,7 +52,7 @@ export const TechIndex = ({ data }: PageProps<GetTechIndexQuery>) => {
           slug: article.slug,
         };
       }),
-    [articles],
+    [articles, isMobile],
   );
 
   return (

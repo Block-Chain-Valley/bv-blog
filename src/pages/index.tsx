@@ -21,9 +21,11 @@ export const getPostsQuery = graphql`
         slug
         createdAt(formatString: "YYYY.MM.DD")
         userEmail
-        homeThumbnail {
-          gatsbyImageData(layout: FIXED, placeholder: BLURRED, width: 144, height: 144)
-          publicUrl
+        squareThumbnail {
+          gatsbyImageData(layout: FIXED, placeholder: BLURRED)
+        }
+        rectangleThumbnail {
+          gatsbyImageData(layout: FIXED, placeholder: BLURRED, width: 1000, height: 500)
         }
       }
     }
@@ -45,7 +47,9 @@ export const HomeIndex = ({ data }: PageProps<GetPostsQuery>) => {
     () =>
       articles.map((article) => {
         return {
-          image: article.homeThumbnail.gatsbyImageData as IGatsbyImageData,
+          image: (isMobile
+            ? article.rectangleThumbnail.gatsbyImageData
+            : article.squareThumbnail.gatsbyImageData) as IGatsbyImageData,
           title: article.title,
           description: article.description,
           tags: article.tags.map((tag) => {
@@ -55,7 +59,7 @@ export const HomeIndex = ({ data }: PageProps<GetPostsQuery>) => {
           slug: article.slug,
         };
       }),
-    [articles],
+    [articles, isMobile],
   );
   const banner = data.allContentfulBanner.nodes.at(0).banner.gatsbyImageData as IGatsbyImageData;
 

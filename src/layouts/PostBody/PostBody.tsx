@@ -33,7 +33,7 @@ export const PostBody = ({
   year,
   profileText,
 }: PostBodyProps) => {
-  const { isMobile } = useMobileContext();
+  const { isMobile, isTablet } = useMobileContext();
   const thumbnailOptions: Partial<IGatsbyImageData> = isMobile
     ? { layout: "constrained" }
     : { layout: "fixed", width: 800, height: 400 };
@@ -58,7 +58,7 @@ export const PostBody = ({
         <div
           className={clsx(
             "flex justify-between self-stretch",
-            isMobile ? "flex-col items-start gap-5" : "items-center",
+            isMobile && !isTablet ? "flex-col items-start gap-5" : "items-center",
           )}
         >
           <ProfileLarge profileImage={profileImage} name={name} team={team} year={year} profileText={profileText} />
