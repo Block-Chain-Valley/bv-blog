@@ -1,9 +1,15 @@
+import clsx from "clsx";
 import { GatsbyImage, IGatsbyImageData } from "gatsby-plugin-image";
 import React from "react";
+import { UIProps } from "src/props";
 
-export const Banner = ({ banner }: { banner: IGatsbyImageData }) => {
+export interface BannerProps extends UIProps.Div {
+  banner: IGatsbyImageData;
+}
+
+export const Banner = ({ banner, className, ...props }: BannerProps) => {
   return (
-    <div className="relative h-[400px] overflow-hidden">
+    <div className={clsx("relative h-[400px] overflow-hidden", className)} {...props}>
       <GatsbyImage
         image={{ ...banner, layout: "constrained", width: 1800, height: 400 }}
         alt="Banner"

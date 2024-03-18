@@ -1,6 +1,5 @@
 import Popup from "@/components/Popup/Popup";
 import Seo from "@/components/Seo/Seo";
-import { useMobileContext } from "@/context/MobileContext";
 import { GetTechIndexQuery } from "@/graphql";
 import { Footer, Header, HomeBody } from "@/layouts";
 import { articleTypeMapper, blogConfig, tagTypeMapper } from "@/utils";
@@ -33,16 +32,13 @@ export const getTechIndexQuery = graphql`
 `;
 
 export const TechIndex = ({ data }: PageProps<GetTechIndexQuery>) => {
-  const { isMobile } = useMobileContext();
-
   const articles = data.allContentfulPost.nodes;
   const articleBriefItems = useMemo(
     () =>
       articles.map((article) => {
         return {
-          image: (isMobile
-            ? article.rectangleThumbnail.gatsbyImageData
-            : article.squareThumbnail.gatsbyImageData) as IGatsbyImageData,
+          mobileImage: article.rectangleThumbnail.gatsbyImageData as IGatsbyImageData,
+          pcImage: article.squareThumbnail.gatsbyImageData as IGatsbyImageData,
           title: article.title,
           description: article.description,
           tags: article.tags.map((tag) => {
@@ -52,7 +48,7 @@ export const TechIndex = ({ data }: PageProps<GetTechIndexQuery>) => {
           slug: article.slug,
         };
       }),
-    [articles, isMobile],
+    [articles],
   );
 
   return (

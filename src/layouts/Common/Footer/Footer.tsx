@@ -1,4 +1,3 @@
-import { useMobileContext } from "@/context/MobileContext";
 import clsx from "clsx";
 import { StaticImage } from "gatsby-plugin-image";
 import React from "react";

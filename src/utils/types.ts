@@ -19,7 +19,8 @@ export enum Team {
 }
 
 export interface ArticleItemTypes {
-  image: IGatsbyImageData;
+  mobileImage: IGatsbyImageData;
+  pcImage: IGatsbyImageData;
   title: string;
   description: string;
   tags: TagTypes[];

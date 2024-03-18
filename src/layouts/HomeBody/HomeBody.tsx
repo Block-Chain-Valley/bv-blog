@@ -1,5 +1,4 @@
 import ArticleGroup from "@/components/Article/ArticleGroup";
-import { useMobileContext } from "@/context/MobileContext";
 import { Article, ArticleItemTypes } from "@/utils";
 import clsx from "clsx";
 import { navigate } from "gatsby";

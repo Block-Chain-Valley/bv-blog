@@ -1,4 +1,3 @@
-import { useMobileContext } from "@/context/MobileContext";
 import { ArticleItemTypes } from "@/utils";
 import clsx from "clsx";
 import { navigate } from "gatsby";
@@ -8,20 +7,21 @@ import Tag from "../Tag/Tag";
 
 export type ArticleProps = ArticleItemTypes;
 
-export const Article = ({ image, title, description, tags, slug }: ArticleProps) => {
+export const Article = ({ mobileImage, pcImage, title, description, tags, slug }: ArticleProps) => {
   const [isHovered, setIsHovered] = useState(false);
-  const { isMobile } = useMobileContext();
-  const thumbnailOptions: Partial<IGatsbyImageData> = isMobile
-    ? { layout: "constrained" }
-    : { layout: "fixed", width: 196, height: 196 };
 
   return (
     <div className={clsx("flex w-full flex-col items-start gap-5", "pc:flex-row pc:items-center pc:gap-14")}>
       {/* Image */}
       <GatsbyImage
-        image={{ ...image, ...thumbnailOptions }}
+        image={{ ...mobileImage, layout: "constrained" }}
         alt="article"
-        className={clsx("move-transition", isHovered && "translate-y-[-8px]")}
+        className={clsx("move-transition pc:hidden", isHovered && "translate-y-[-8px]")}
+      />
+      <GatsbyImage
+        image={{ ...pcImage, layout: "fixed", width: 196, height: 196 }}
+        alt="article"
+        className={clsx("move-transition mobile:hidden", isHovered && "translate-y-[-8px]")}
       />
       {/* Article */}
       <div className={clsx("flex flex-col items-start gap-2.5", "pc:gap-5")}>

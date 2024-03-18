@@ -1,9 +1,9 @@
 import Toast from "@/components/Popup/Toast";
-import { useMobileContext } from "@/context/MobileContext";
 import { useToastContext } from "@/context/ToastContext";
 import clsx from "clsx";
 import { navigate } from "gatsby";
 import React from "react";
+import { UIProps } from "src/props";
 
 export interface TabProps {
   tabName: string;
@@ -35,13 +35,17 @@ export const Tab = ({ tabName, isActivated, handleClick }: TabProps) => {
   );
 };
 
-export const Tabs = () => {
+export interface TabsProps extends UIProps.Div {}
+
+export const Tabs = ({ className, ...props }: TabsProps) => {
   return (
     <div
       className={clsx(
         "my-2.5 flex flex-col items-start gap-5",
         "pc:flex-row pc:items-center pc:justify-center pc:gap-[50px]",
+        className,
       )}
+      {...props}
     >
       <Tab
         tabName="Tech"

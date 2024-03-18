@@ -1,14 +1,15 @@
 import { StaticImage } from "gatsby-plugin-image";
 import React from "react";
+import { UIProps } from "src/props";
 
-export interface MenuButtonProps {
+export interface MenuButtonProps extends UIProps.Button {
   isMenuOpened: boolean;
   handleClick: () => void;
 }
 
-export const MenuButton = ({ isMenuOpened, handleClick }: MenuButtonProps) => {
+export const MenuButton = ({ isMenuOpened, handleClick, ...props }: MenuButtonProps) => {
   return (
-    <button type="button" onClick={handleClick}>
+    <button type="button" onClick={handleClick} {...props}>
       {isMenuOpened ? (
         <StaticImage
           src="../../../assets/icons/Close.png"

@@ -1,4 +1,3 @@
-import { useMobileContext } from "@/context/MobileContext";
 import clsx from "clsx";
 import React from "react";
 import ReactMarkdown from "react-markdown";
@@ -7,11 +6,9 @@ import Code from "./Code";
 import Pre from "./Pre";
 
 export const Markdown = ({ body }: { body: string }) => {
-  const { isMobile } = useMobileContext();
-
   return (
     <ReactMarkdown
-      className={clsx("prose max-w-none", isMobile && "prose-sm w-full")}
+      className={clsx("prose max-w-none", "mobile:prose-sm mobile:w-full")}
       remarkPlugins={[remarkGfm]}
       components={{ code: Code, pre: Pre }}
     >

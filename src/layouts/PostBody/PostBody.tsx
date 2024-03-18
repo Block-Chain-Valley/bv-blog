@@ -9,13 +9,15 @@ import { Team } from "@/utils";
 import { useLocation } from "@reach/router";
 import clsx from "clsx";
 import copy from "copy-to-clipboard";
-import { GatsbyImage, IGatsbyImageData } from "gatsby-plugin-image";
+import { IGatsbyImageData } from "gatsby-plugin-image";
 import React from "react";
+import { PostThumbnail } from "./PostThumbnail";
 
 export interface PostBodyProps {
   title: string;
   articleType: string;
   createdAt: string;
+  phoneThumbnail: IGatsbyImageData;
   thumbnail: IGatsbyImageData;
   body: string;
   name: string;
@@ -29,6 +31,7 @@ export const PostBody = ({
   title,
   articleType,
   createdAt,
+  phoneThumbnail,
   thumbnail,
   body,
   profileImage,
@@ -40,10 +43,6 @@ export const PostBody = ({
   const { isMobile } = useMobileContext();
   const { setToastContext } = useToastContext();
   const location = useLocation();
-
-  const thumbnailOptions: Partial<IGatsbyImageData> = isMobile
-    ? { layout: "constrained" }
-    : { layout: "fixed", width: 800, height: 400 };
 
   const fullUrl = `${location.origin}${location.pathname}${location.search}${location.hash}`;
 
@@ -60,7 +59,7 @@ export const PostBody = ({
   return (
     <div className={clsx("flex w-full flex-col items-start gap-[50px] px-8 py-10", "pc:w-[800px] pc:px-0")}>
       {/* Thumbnail */}
-      <GatsbyImage image={{ ...thumbnail, ...thumbnailOptions }} alt="Thumbnail" />
+      <PostThumbnail phoneThumbnail={phoneThumbnail} thumbnail={thumbnail} />
       {/* Title */}
       <div className="flex w-full flex-col items-start gap-5">
         <div className="text-16/regular text-theme-black">{articleType}</div>

@@ -1,4 +1,3 @@
-import { useMobileContext } from "@/context/MobileContext";
 import { TagTypes } from "@/utils";
 import clsx from "clsx";
 import React from "react";
@@ -19,7 +18,6 @@ const getTagClasses = (type: TagTypes) => {
 };
 
 export const Tag = ({ type }: { type: TagTypes }) => {
-  const { isMobile } = useMobileContext();
   return (
     <div
       className={clsx(
