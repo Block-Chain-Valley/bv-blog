@@ -12,9 +12,13 @@ export const PostThumbnail = ({ phoneThumbnail, thumbnail }: PostThumbnailProps)
       <GatsbyImage
         image={{ ...phoneThumbnail, layout: "constrained" }}
         alt="Thumbnail"
-        className="tablet:hidden pc:hidden"
+        className="tablet:!hidden pc:!hidden"
       />
-      <GatsbyImage image={{ ...thumbnail, layout: "constrained" }} alt="Thumbnail" className="phone:hidden pc:hidden" />
+      <GatsbyImage
+        image={{ ...thumbnail, layout: "constrained" }}
+        alt="Thumbnail"
+        className="phone:!hidden pc:!hidden"
+      />
       <GatsbyImage
         image={{ ...thumbnail, layout: "fixed", width: 800, height: 400 }}
         alt="Thumbnail"

@@ -16,7 +16,7 @@ export const Article = ({ mobileImage, pcImage, title, description, tags, slug }
       <GatsbyImage
         image={{ ...mobileImage, layout: "constrained" }}
         alt="article"
-        className={clsx("move-transition pc:hidden", isHovered && "translate-y-[-8px]")}
+        className={clsx("move-transition pc:!hidden", isHovered && "translate-y-[-8px]")}
       />
       <GatsbyImage
         image={{ ...pcImage, layout: "fixed", width: 196, height: 196 }}
