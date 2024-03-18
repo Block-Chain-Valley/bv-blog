@@ -47,7 +47,6 @@ export const Post = ({ data }: PageProps<GetPostBySlugQuery>) => {
 
   return (
     <>
-      <Seo title={title} description={blogConfig.description} featuredImage={rectangleThumbnail.gatsbyImageData} />
       <Popup />
       <div className="flex flex-col items-center">
         <Header />
@@ -68,6 +67,10 @@ export const Post = ({ data }: PageProps<GetPostBySlugQuery>) => {
       </div>
     </>
   );
+};
+
+export const Head = () => {
+  return <Seo title={blogConfig.title} description={blogConfig.description} />;
 };
 
 export default Post;

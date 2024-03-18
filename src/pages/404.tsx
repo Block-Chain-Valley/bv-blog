@@ -41,4 +41,8 @@ const NotFoundPage: React.FC<PageProps> = () => {
   );
 };
 
+export const Head = () => {
+  return <Seo title={blogConfig.title} description={blogConfig.description} />;
+};
+
 export default NotFoundPage;

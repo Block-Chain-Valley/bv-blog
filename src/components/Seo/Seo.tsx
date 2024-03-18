@@ -3,7 +3,6 @@ import { useLocation } from "@reach/router";
 import { graphql, useStaticQuery } from "gatsby";
 import { IGatsbyImageData } from "gatsby-plugin-image";
 import React from "react";
-import { Helmet } from "react-helmet";
 
 export interface SeoProps {
   title: string;
@@ -106,14 +105,14 @@ const Seo = (props: SeoProps) => {
   }
 
   return (
-    <Helmet>
+    <>
       <html lang="en" />
       <meta charSet="utf-8" />
       <title>{title}</title>
       {metas.map((meta) => (
         <meta key={meta.name} name={meta.name} content={meta.content} />
       ))}
-    </Helmet>
+    </>
   );
 };
 

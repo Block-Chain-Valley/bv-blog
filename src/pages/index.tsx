@@ -60,7 +60,6 @@ export const HomeIndex = ({ data }: PageProps<GetPostsQuery>) => {
 
   return (
     <>
-      <Seo title={blogConfig.title} description={blogConfig.description} />
       <Popup />
       <div className="flex flex-col items-center">
         <Header />
@@ -70,6 +69,10 @@ export const HomeIndex = ({ data }: PageProps<GetPostsQuery>) => {
       </div>
     </>
   );
+};
+
+export const Head = () => {
+  return <Seo title={blogConfig.title} description={blogConfig.description} />;
 };
 
 export default HomeIndex;
