@@ -1,12 +1,16 @@
+import Button from "@/components/Button/Button";
 import Markdown from "@/components/Markdown/Markdown";
+import Toast from "@/components/Popup/Toast";
 import Profile from "@/components/Profile/Profile";
 import ProfileLarge from "@/components/Profile/ProfileLarge";
-import ShareButton from "@/components/ShareButton/ShareButton";
 import { useMobileContext } from "@/context/MobileContext";
+import { useToastContext } from "@/context/ToastContext";
 import { Team } from "@/utils";
+import { useLocation } from "@reach/router";
 import clsx from "clsx";
+import copy from "copy-to-clipboard";
 import { GatsbyImage, IGatsbyImageData } from "gatsby-plugin-image";
-import React, { useContext } from "react";
+import React from "react";
 
 export interface PostBodyProps {
   title: string;
@@ -34,9 +38,24 @@ export const PostBody = ({
   profileText,
 }: PostBodyProps) => {
   const { isMobile, isTablet } = useMobileContext();
+  const { setToastContext } = useToastContext();
+  const location = useLocation();
+
   const thumbnailOptions: Partial<IGatsbyImageData> = isMobile
     ? { layout: "constrained" }
     : { layout: "fixed", width: 800, height: 400 };
+
+  const fullUrl = `${location.origin}${location.pathname}${location.search}${location.hash}`;
+
+  const handleCopyClick = () => {
+    copy(fullUrl);
+    setToastContext(
+      <Toast
+        message={isMobile ? "아티클 링크를 복사했어요." : "이 아티클의 링크를 클립보드에 복사했어요."}
+        isPositive={true}
+      />,
+    );
+  };
 
   return (
     <div className={clsx("flex flex-col items-start gap-[50px] py-10", isMobile ? "w-full px-8" : "w-[800px]")}>
@@ -62,7 +81,7 @@ export const PostBody = ({
           )}
         >
           <ProfileLarge profileImage={profileImage} name={name} team={team} year={year} profileText={profileText} />
-          <ShareButton description="이 아티클 공유하기" />
+          <Button description="이 아티클 공유하기" handleClick={handleCopyClick} />
         </div>
       </div>
     </div>

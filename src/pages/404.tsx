@@ -1,49 +1,33 @@
-import { HeadFC, Link, PageProps } from "gatsby";
-import React from "react";
-
-const pageStyles = {
-  color: "#232129",
-  padding: "96px",
-  fontFamily: "-apple-system, Roboto, sans-serif, serif",
-};
-const headingStyles = {
-  marginTop: 0,
-  marginBottom: 64,
-  maxWidth: 320,
-};
-
-const paragraphStyles = {
-  marginBottom: 48,
-};
-const codeStyles = {
-  color: "#8A6534",
-  padding: 4,
-  backgroundColor: "#FFF4DB",
-  fontSize: "1.25rem",
-  borderRadius: 4,
-};
+import { useMobileContext } from "@/context/MobileContext";
+import { Header } from "@/layouts";
+import { PageProps, navigate } from "gatsby";
+import { StaticImage } from "gatsby-plugin-image";
+import React, { useEffect } from "react";
 
 const NotFoundPage: React.FC<PageProps> = () => {
+  const { isMobile } = useMobileContext();
+
+  useEffect(() => {
+    navigate("/");
+  }, []);
+
   return (
-    <main style={pageStyles}>
-      <h1 style={headingStyles}>Page not found</h1>
-      <p style={paragraphStyles}>
-        Sorry 😔, we couldn’t find what you were looking for.
-        <br />
-        {process.env.NODE_ENV === "development" ? (
-          <>
-            <br />
-            Try creating a page in <code style={codeStyles}>src/pages/</code>.
-            <br />
-          </>
-        ) : null}
-        <br />
-        <Link to="/">Go home</Link>.
-      </p>
-    </main>
+    <>
+      <div className="flex h-screen w-screen flex-col items-center justify-center gap-5">
+        {isMobile ? (
+          <StaticImage src="../assets/images/Cat.png" alt="Cat" placeholder="none" layout="fixed" height={144} />
+        ) : (
+          <StaticImage src="../assets/images/Cat.png" alt="Cat" placeholder="none" layout="fixed" height={400} />
+        )}
+        <p className="text-20/regular text-theme-black">홈 화면으로 이동 중이예요.</p>
+        <div className="flex flex-col items-center justify-center">
+          <button type="button" className="text-16/regular text-theme-gray" onClick={() => navigate("/")}>
+            홈 화면이 나타나지 않나요?
+          </button>
+        </div>
+      </div>
+    </>
   );
 };
 
 export default NotFoundPage;
-
-export const Head: HeadFC = () => <title>Not found</title>;
