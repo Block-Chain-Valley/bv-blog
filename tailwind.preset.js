@@ -64,7 +64,7 @@ module.exports = {
       lg: "1440px",
     },
     fontFamily: {
-      sans: ["Pretendard"],
+      sans: ["Pretendard", "Pretendard Variable"],
     },
     fontSize: {
       "10/regular": ["10px", { fontWeight: 400, lineHeight: "130%" }],
