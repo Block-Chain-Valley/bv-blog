@@ -15,12 +15,12 @@ export const Header = () => {
   return (
     <div
       className={clsx(
-        "sticky top-0 z-30 flex w-full flex-col bg-theme-white",
-        isMobile ? "mb-2.5 gap-2.5 pt-2.5" : "pt-8",
+        "sticky top-0 z-30 mb-2.5 flex w-full flex-col gap-2.5 bg-theme-white pt-2.5",
+        "pc:mb-0 pc:gap-0 pc:pt-8",
       )}
     >
       {/* Header element */}
-      <div className={clsx("flex items-center justify-between", isMobile ? "px-2.5" : "mb-8 px-[60px]")}>
+      <div className={clsx("flex items-center justify-between px-2.5", "pc:mb-8 pc:px-[60px]")}>
         {/* Logo */}
         <button
           type="button"
@@ -44,7 +44,7 @@ export const Header = () => {
               height={45}
             />
           )}
-          <div className={clsx("text-theme-black", isMobile ? "text-13/regular" : "text-16/regular")}>기술 블로그</div>
+          <div className={clsx("text-13/regular text-theme-black", "pc:text-16/regular")}>기술 블로그</div>
         </button>
         {/* Menu Button */}
         {isMobile && <MenuButton isMenuOpened={isMenuOpened} handleClick={() => setIsMenuOpened(!isMenuOpened)} />}

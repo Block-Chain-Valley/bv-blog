@@ -16,7 +16,7 @@ export const Article = ({ image, title, description, tags, slug }: ArticleProps)
     : { layout: "fixed", width: 196, height: 196 };
 
   return (
-    <div className={clsx("flex w-full", isMobile ? "flex-col items-start gap-5" : "items-center gap-14")}>
+    <div className={clsx("flex w-full flex-col items-start gap-5", "pc:flex-row pc:items-center pc:gap-14")}>
       {/* Image */}
       <GatsbyImage
         image={{ ...image, ...thumbnailOptions }}
@@ -24,13 +24,13 @@ export const Article = ({ image, title, description, tags, slug }: ArticleProps)
         className={clsx("move-transition", isHovered && "translate-y-[-8px]")}
       />
       {/* Article */}
-      <div className={clsx("flex flex-col items-start", isMobile ? "gap-2.5" : "gap-5")}>
+      <div className={clsx("flex flex-col items-start gap-2.5", "pc:gap-5")}>
         <button
           type="button"
           className={clsx(
-            "soft-transition text-left text-theme-black",
+            "soft-transition text-left text-16/semi-bold text-theme-black",
+            "pc:text-24/semi-bold",
             isHovered && "text-theme-primary",
-            isMobile ? "text-16/semi-bold" : "text-24/semi-bold",
           )}
           onClick={() => {
             navigate(`/post/${slug}`);
@@ -44,7 +44,7 @@ export const Article = ({ image, title, description, tags, slug }: ArticleProps)
         >
           {title}
         </button>
-        <div className={clsx("text-theme-black", isMobile ? "text-13/regular" : "text-16/regular")}>{description}</div>
+        <div className={clsx("text-13/regular text-theme-black", "pc:text-16/regular")}>{description}</div>
         <div className="flex items-start gap-3">
           {/* tags */}
           {tags.map((tag, index) => (

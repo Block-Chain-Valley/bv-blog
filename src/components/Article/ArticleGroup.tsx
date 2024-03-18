@@ -1,4 +1,3 @@
-import { useMobileContext } from "@/context/MobileContext";
 import { ArticleItemTypes } from "@/utils";
 import clsx from "clsx";
 import React from "react";
@@ -18,12 +17,10 @@ export const ArticleGroup = ({
   moreButtonVisible = true,
   handleMoreButtonClick,
 }: ArticleGroupProps) => {
-  const { isMobile } = useMobileContext();
-
   return (
-    <div className={clsx("flex w-full flex-col items-start gap-10", isMobile ? "py-5" : "py-10")}>
+    <div className={clsx("flex w-full flex-col items-start gap-10 py-5", "pc:py-10")}>
       {/* 제목 */}
-      <div className={clsx("text-theme-black", isMobile ? "text-20/semi-bold" : "text-30/semi-bold")}>{groupTitle}</div>
+      <div className={clsx("text-20/semi-bold text-theme-black", "pc:text-30/semi-bold")}>{groupTitle}</div>
       {/* 아티클 */}
       <div className="flex flex-col items-start gap-[60px]">
         {articleBriefItems.map((article, index) => (

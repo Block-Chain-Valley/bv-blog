@@ -15,7 +15,7 @@ const MobileContext = createContext<MobileContextType>({
 });
 
 const MobileProvider = ({ children }) => {
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(true);
   const [isTablet, setIsTablet] = useState(false);
 
   const providerValue = useMemo(

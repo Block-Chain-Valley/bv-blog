@@ -1,5 +1,4 @@
 import Popup from "@/components/Popup/Popup";
-import Toast from "@/components/Popup/Toast";
 import Seo from "@/components/Seo/Seo";
 import { useMobileContext } from "@/context/MobileContext";
 import { GetPostsQuery } from "@/graphql";

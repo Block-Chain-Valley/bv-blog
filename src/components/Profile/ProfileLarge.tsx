@@ -23,10 +23,10 @@ export const ProfileLarge = ({ profileImage, name, team, year, profileText }: Pr
       />
       <div className="flex flex-col items-start justify-center gap-1 text-theme-black">
         <div className="flex items-center justify-center gap-2">
-          <div className={clsx(isMobile ? "text-16/semi-bold" : "text-20/semi-bold")}>{name}</div>
-          <div className={clsx(isMobile ? "text-13/regular" : "text-16/regular")}>{`${team}, ${yearMapper(year)}`}</div>
+          <div className={clsx("text-16/semi-bold", "pc:text-20/semi-bold")}>{name}</div>
+          <div className={clsx("text-13/regular", "pc:text-16/regular")}>{`${team}, ${yearMapper(year)}`}</div>
         </div>
-        <div className={clsx(isMobile ? "text-10/regular" : "text-13/regular")}>{profileText}</div>
+        <div className={clsx("text-10/regular", "pc:text-13/regular")}>{profileText}</div>
       </div>
     </div>
   );

@@ -59,9 +59,8 @@ module.exports = {
   },
   theme: {
     screens: {
-      sm: "600px",
-      md: "1024px",
-      lg: "1440px",
+      tablet: "600px",
+      pc: "1000px",
     },
     fontFamily: {
       sans: ["Pretendard", "Pretendard Variable"],

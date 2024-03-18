@@ -11,10 +11,8 @@ export interface HomeBodyProps {
 }
 
 export const HomeBody = ({ articleBriefItems, isHome = true }: HomeBodyProps) => {
-  const { isMobile } = useMobileContext();
-
   return (
-    <div className={clsx("flex flex-col items-start", isMobile ? "w-full px-8 py-2.5" : "w-[1000px] py-10")}>
+    <div className={clsx("flex w-full flex-col items-start px-8 py-2.5", "pc:w-[1000px] pc:px-0 pc:py-10")}>
       {/* Recent */}
       {isHome && (
         <ArticleGroup
