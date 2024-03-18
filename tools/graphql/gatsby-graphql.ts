@@ -247,6 +247,7 @@ export type Site = Node & {
   siteMetadata?: Maybe<SiteSiteMetadata>;
   port?: Maybe<Scalars['Int']>;
   host?: Maybe<Scalars['String']>;
+  adapter?: Maybe<SiteAdapter>;
   graphqlTypegen?: Maybe<SiteGraphqlTypegen>;
   polyfill?: Maybe<Scalars['Boolean']>;
   pathPrefix?: Maybe<Scalars['String']>;
@@ -264,6 +265,10 @@ export type SiteBuildTimeArgs = {
   fromNow?: InputMaybe<Scalars['Boolean']>;
   difference?: InputMaybe<Scalars['String']>;
   locale?: InputMaybe<Scalars['String']>;
+};
+
+export type SiteAdapter = {
+  name?: Maybe<Scalars['String']>;
 };
 
 export type SiteGraphqlTypegen = {
@@ -1251,6 +1256,7 @@ export type QuerySiteArgs = {
   siteMetadata?: InputMaybe<SiteSiteMetadataFilterInput>;
   port?: InputMaybe<IntQueryOperatorInput>;
   host?: InputMaybe<StringQueryOperatorInput>;
+  adapter?: InputMaybe<SiteAdapterFilterInput>;
   graphqlTypegen?: InputMaybe<SiteGraphqlTypegenFilterInput>;
   polyfill?: InputMaybe<BooleanQueryOperatorInput>;
   pathPrefix?: InputMaybe<StringQueryOperatorInput>;
@@ -2316,6 +2322,10 @@ export type SiteSiteMetadataOgFilterInput = {
   twitterCreator?: InputMaybe<StringQueryOperatorInput>;
 };
 
+export type SiteAdapterFilterInput = {
+  name?: InputMaybe<StringQueryOperatorInput>;
+};
+
 export type SiteGraphqlTypegenFilterInput = {
   typesOutputPath?: InputMaybe<StringQueryOperatorInput>;
   documentSearchPaths?: InputMaybe<StringQueryOperatorInput>;
@@ -2372,6 +2382,7 @@ export type SiteFieldSelector = {
   siteMetadata?: InputMaybe<SiteSiteMetadataFieldSelector>;
   port?: InputMaybe<FieldSelectorEnum>;
   host?: InputMaybe<FieldSelectorEnum>;
+  adapter?: InputMaybe<SiteAdapterFieldSelector>;
   graphqlTypegen?: InputMaybe<SiteGraphqlTypegenFieldSelector>;
   polyfill?: InputMaybe<FieldSelectorEnum>;
   pathPrefix?: InputMaybe<FieldSelectorEnum>;
@@ -2394,6 +2405,10 @@ export type SiteSiteMetadataFieldSelector = {
 export type SiteSiteMetadataOgFieldSelector = {
   siteName?: InputMaybe<FieldSelectorEnum>;
   twitterCreator?: InputMaybe<FieldSelectorEnum>;
+};
+
+export type SiteAdapterFieldSelector = {
+  name?: InputMaybe<FieldSelectorEnum>;
 };
 
 export type SiteGraphqlTypegenFieldSelector = {
@@ -2448,6 +2463,7 @@ export type SiteFilterInput = {
   siteMetadata?: InputMaybe<SiteSiteMetadataFilterInput>;
   port?: InputMaybe<IntQueryOperatorInput>;
   host?: InputMaybe<StringQueryOperatorInput>;
+  adapter?: InputMaybe<SiteAdapterFilterInput>;
   graphqlTypegen?: InputMaybe<SiteGraphqlTypegenFilterInput>;
   polyfill?: InputMaybe<BooleanQueryOperatorInput>;
   pathPrefix?: InputMaybe<StringQueryOperatorInput>;
@@ -2464,6 +2480,7 @@ export type SiteSortInput = {
   siteMetadata?: InputMaybe<SiteSiteMetadataSortInput>;
   port?: InputMaybe<SortOrderEnum>;
   host?: InputMaybe<SortOrderEnum>;
+  adapter?: InputMaybe<SiteAdapterSortInput>;
   graphqlTypegen?: InputMaybe<SiteGraphqlTypegenSortInput>;
   polyfill?: InputMaybe<SortOrderEnum>;
   pathPrefix?: InputMaybe<SortOrderEnum>;
@@ -2486,6 +2503,10 @@ export type SiteSiteMetadataSortInput = {
 export type SiteSiteMetadataOgSortInput = {
   siteName?: InputMaybe<SortOrderEnum>;
   twitterCreator?: InputMaybe<SortOrderEnum>;
+};
+
+export type SiteAdapterSortInput = {
+  name?: InputMaybe<SortOrderEnum>;
 };
 
 export type SiteGraphqlTypegenSortInput = {

@@ -1,6 +1,8 @@
 import type { GatsbyConfig } from "gatsby";
+import adapter from "gatsby-adapter-netlify";
 
 const config: GatsbyConfig = {
+  adapter: adapter(),
   siteMetadata: {
     title: `블록체인 밸리 블로그`,
     author: `blockchainvalley`,
