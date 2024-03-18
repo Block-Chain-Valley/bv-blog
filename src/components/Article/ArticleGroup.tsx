@@ -1,4 +1,3 @@
-import { useMobileContext } from "@/context/MobileContext";
 import { ArticleItemTypes } from "@/utils";
 import clsx from "clsx";
 import React from "react";
@@ -18,23 +17,29 @@ export const ArticleGroup = ({
   moreButtonVisible = true,
   handleMoreButtonClick,
 }: ArticleGroupProps) => {
-  const { isMobile } = useMobileContext();
-
   return (
-    <div className={clsx("flex w-full flex-col items-start gap-10", isMobile ? "py-5" : "py-10")}>
+    <div className={clsx("flex w-full flex-col items-start gap-10 py-5", "pc:py-10")}>
       {/* 제목 */}
-      <div className={clsx("text-theme-black", isMobile ? "text-20/semi-bold" : "text-30/semi-bold")}>{groupTitle}</div>
-      {/* 아티클 */}
-      <div className="flex flex-col items-start gap-[60px]">
-        {articleBriefItems.map((article, index) => (
-          <Article key={index} {...article} />
-        ))}
-      </div>
-      {/* 더 많은 아티클 보기 버튼 */}
-      {moreButtonVisible && (
-        <div className="flex flex-col items-center justify-center gap-2.5 self-stretch">
-          <MoreArticleButton description="더 많은 아티클 보기" handleClick={handleMoreButtonClick} />
+      <div className={clsx("text-20/semi-bold text-theme-black", "pc:text-30/semi-bold")}>{groupTitle}</div>
+      {articleBriefItems.length === 0 ? (
+        <div className="flex items-center justify-center self-stretch py-10 text-16/regular text-theme-gray">
+          아직 게시글이 존재하지 않아요.
         </div>
+      ) : (
+        <>
+          {/* 아티클 */}
+          <div className="flex flex-col items-start gap-[60px]">
+            {articleBriefItems.map((article, index) => (
+              <Article key={index} {...article} />
+            ))}
+          </div>
+          {/* 더 많은 아티클 보기 버튼 */}
+          {moreButtonVisible && (
+            <div className="flex flex-col items-center justify-center gap-2.5 self-stretch">
+              <MoreArticleButton description="더 많은 아티클 보기" handleClick={handleMoreButtonClick} />
+            </div>
+          )}
+        </>
       )}
     </div>
   );

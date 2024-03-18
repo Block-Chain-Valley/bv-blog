@@ -59,12 +59,13 @@ module.exports = {
   },
   theme: {
     screens: {
-      sm: "600px",
-      md: "1024px",
-      lg: "1440px",
+      phone: { min: "0px", max: "600px" },
+      tablet: { min: "600px", max: "1000px" },
+      mobile: { min: "0px", max: "1000px" },
+      pc: "1000px",
     },
     fontFamily: {
-      sans: ["Pretendard"],
+      sans: ["Pretendard", "Pretendard Variable"],
     },
     fontSize: {
       "10/regular": ["10px", { fontWeight: 400, lineHeight: "130%" }],

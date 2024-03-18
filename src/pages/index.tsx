@@ -1,7 +1,5 @@
 import Popup from "@/components/Popup/Popup";
-import Toast from "@/components/Popup/Toast";
 import Seo from "@/components/Seo/Seo";
-import { useMobileContext } from "@/context/MobileContext";
 import { GetPostsQuery } from "@/graphql";
 import { Banner, Footer, Header, HomeBody } from "@/layouts";
 import { articleTypeMapper, blogConfig, tagTypeMapper } from "@/utils";
@@ -40,16 +38,13 @@ export const getPostsQuery = graphql`
 `;
 
 export const HomeIndex = ({ data }: PageProps<GetPostsQuery>) => {
-  const { isMobile } = useMobileContext();
-
   const articles = data.allContentfulPost.nodes;
   const articleBriefItems = useMemo(
     () =>
       articles.map((article) => {
         return {
-          image: (isMobile
-            ? article.rectangleThumbnail.gatsbyImageData
-            : article.squareThumbnail.gatsbyImageData) as IGatsbyImageData,
+          mobileImage: article.rectangleThumbnail.gatsbyImageData as IGatsbyImageData,
+          pcImage: article.squareThumbnail.gatsbyImageData as IGatsbyImageData,
           title: article.title,
           description: article.description,
           tags: article.tags.map((tag) => {
@@ -59,7 +54,7 @@ export const HomeIndex = ({ data }: PageProps<GetPostsQuery>) => {
           slug: article.slug,
         };
       }),
-    [articles, isMobile],
+    [articles],
   );
   const banner = data.allContentfulBanner.nodes.at(0).banner.gatsbyImageData as IGatsbyImageData;
 
@@ -69,7 +64,7 @@ export const HomeIndex = ({ data }: PageProps<GetPostsQuery>) => {
       <Popup />
       <div className="flex flex-col items-center">
         <Header />
-        {!isMobile && <Banner banner={banner} />}
+        <Banner className="mobile:hidden" banner={banner} />
         <HomeBody articleBriefItems={articleBriefItems} />
         <Footer />
       </div>
